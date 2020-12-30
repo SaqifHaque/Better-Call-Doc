@@ -160,16 +160,16 @@
             let confpass = document.getElementById("confpass").value;
             let bgroup = document.getElementById("bgroup").value;
             if (uname == "" || uname.length <= 3) {
-                toastr["error"]("Please,Provide Valid UserName")
+                toastr["error"]("Please,Provide Valid UserName(Atleast 4 Characters)")
             }
             if (phone.length != 15) {
-                toastr["error"]("Please,Provide Valid Phone Number")
+                toastr["error"]("Phone Number format Should be +880-xxxxxxxxxxx")
             }
             if (email == "" || email.match(mailformat)) {
                 toastr["error"]("Please,Provide Valid Email")
             }
             if (pass == "" || pass.length <= 3) {
-                toastr["error"]("Please,Provide Valid password")
+                toastr["error"]("Password Length Should be atleast 4 characters")
             }
             if (confpass == "" || confpass != pass) {
                 toastr["error"]("Confirm Password doesn't match with Password")

@@ -6,13 +6,26 @@ use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use App\User;
 use \Illuminate\Foundation\Auth\AuthenticatesUsers;
+require 'vendor/autoload.php';
+use Mailgun\Mailgun;
 
 class HomeController extends Controller
 {
     public $error = "";
+    public $auth = "";
     public function Login()
     {
         return view('home.login');
+    }
+
+    public function Pincode()
+    {
+        if($request->session()->has('pin')){
+            return view('home.login');
+        }
+        else{
+            return redirect()->route('home.login');
+        }
     }
 
     public function LoadFacebook()
@@ -33,7 +46,7 @@ class HomeController extends Controller
 
     public function Registration()
     {
-        return view('home.registration');
+        return view('home.registration', $error);
     }
 
     public function Register(Request $req)
@@ -50,7 +63,24 @@ class HomeController extends Controller
         $user->password                 = $req->password;
 
         if ($user->save()) {
-            return redirect()->route('home.login');
+            $pin = rand(1000,9999);
+            $req->session()->put('pin', $pin);
+
+            $mgClient = new Mailgun('YOUR_API_KEY');
+            $domain = "YOUR_DOMAIN_NAME";
+
+            $result = $mgClient->sendMessage($domain, array(
+                'from'	=> 'BetterCallDoc',
+                'to'	=> $user->email,
+                'subject' => 'Email verification',
+                'text'	=> 'Your Pincode is: '+ $pin
+            ));
+            If($result){
+                return redirect()->route('home.pincode');
+            }else{
+
+
+            }
         }
         else{
             echo "Server Error";
@@ -74,7 +104,7 @@ class HomeController extends Controller
                         ->first();
         if($user)
         {
-            $req->session()->put('uname', $user->u_name);
+            $req->session()->put('uname', $user->name);
             $req->session()->put('type', $user->type);
 
             if($user->type == "Admin"){

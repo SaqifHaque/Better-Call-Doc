@@ -24,6 +24,9 @@ Route::post('/registration','HomeController@Register');
 
 Route::get('/login','HomeController@Login')->name('user.login');
 Route::post('/login','HomeController@ValidateLogin');
+
+Route::get('/pincode','HomeController@Pincode');
+
 Route::get('/social','HomeController@LoadFacebook');
 
 //Route::get('/dashboard','HomeController@FacebookResponse')->name('teacher.dashboard');
