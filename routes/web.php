@@ -19,13 +19,14 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/registration','HomeController@Registration')->name('user.register');
+Route::get('/registration','HomeController@Registration')->name('home.registration');
 Route::post('/registration','HomeController@Register');
 
-Route::get('/login','HomeController@Login')->name('user.login');
+Route::get('/login','HomeController@Login')->name('home.login');
 Route::post('/login','HomeController@ValidateLogin');
 
-Route::get('/pincode','HomeController@Pincode');
+Route::get('/pincode','HomeController@Pincode')->name('home.pincode');
+Route::post('/pincode','HomeController@CheckPin');
 
 Route::get('/social','HomeController@LoadFacebook');
 

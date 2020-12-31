@@ -128,13 +128,7 @@
     <script src="{{ asset('dex/js/global.js') }}"></script>
     <script src="{{ asset('dex/js/toastr.min.js') }}"></script>
     <script>
-        let check = '<%= msg %>';
-
-        if (check != "") {
-            toastr["error"]("Email Already Exists")
-        }
-        $('#button').on('click', function() {
-            toastr.options = {
+         toastr.options = {
                 "closeButton": false,
                 "debug": false,
                 "newestOnTop": false,
@@ -151,6 +145,12 @@
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
             }
+        let check = "{{ $ch }}";
+        if (check == "Email Exits") {
+            toastr["error"]("Email Already Exists")
+        }
+        else if(check == "Failed"){
+           
             var mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
 
             let uname = document.getElementById("uname").value;
@@ -177,7 +177,7 @@
             if (bgroup == "") {
                 toastr["error"]("Please select a Blood Group")
             }
-        })
+        }
     </script>
 
 </body>

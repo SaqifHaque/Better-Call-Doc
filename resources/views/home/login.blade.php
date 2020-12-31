@@ -9,7 +9,7 @@
     
     <!--Fontawesome CDN-->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
+	<link href="{{ asset('dex/js/toastr.min.css') }}" rel="stylesheet">
 	<!--Custom styles-->
 	<link rel="stylesheet" type="text/css" href="{{ asset('log/css/login.css') }}">
 </head>
@@ -55,3 +55,30 @@
 </div>
 </body>
 </html>
+<script src="{{ asset('dex/vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('dex/js/toastr.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+            let msg = "{{ $auth}}";
+            if (msg != "") {
+                toastr["error"](msg);
+            }
+        })
+    </script>
