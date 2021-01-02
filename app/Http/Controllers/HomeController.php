@@ -7,7 +7,6 @@ use Laravel\Socialite\Facades\Socialite;
 use App\User;
 use \Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Validator;
-//require 'vendor/autoload.php';
 use Mailgun\Mailgun;
 use App\Rules\Email;
 
@@ -46,22 +45,22 @@ class HomeController extends Controller
 
     public function Registration()
     {
-        $ch = "";
-        return view('home.registration', ["ch" => $ch]);
+       // $ch = "";
+        return view('home.registration');
     }
 
     public function Register(Request $req)
     {
-        $ch="";
-        $check = User::where('email', $req->email)
-                        ->first();
-        if($check){
-            $this->ch = "Email Exits";
-            return view('home.registration', ["ch" => $ch]);
-        }
+        // $ch="";
+        // $check = User::where('email', $req->email)
+        //                 ->first();
+        // if($check){
+        //     $this->ch = "Email Exits";
+        //     return view('home.registration', ["ch" => $ch]);
+        // }
         $validator = Validator::make($req->all(), [
             'name' => 'required|min:4',
-            'email' => new Email,
+            'email' => 'required|unique:users,email|email:rfc,dns',
             'blood_group' => 'required',
             'phone_number' => 'required|min:15|max:15',
             'gender' => 'required',
@@ -70,8 +69,10 @@ class HomeController extends Controller
         ]);
         
         if ($validator->fails()) {
-            $ch = "Failed";
-            return view('home.registration', ["ch" => $ch])->withInput();;
+           // $ch = "Failed";
+           return redirect()->route('home.registration')
+           ->with('errors', $validator->errors())
+           ->withInput();
         }else{
         $user = new User();
         $user->name                       = $req->username;

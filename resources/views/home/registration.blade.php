@@ -10,7 +10,7 @@
     <meta name="keywords" content="Colorlib Templates">
 
     <!-- Title Page-->
-    <title>Au Register Forms by Colorlib</title>
+    <title>Registration Form</title>
 
     <!-- Icons font CSS-->
     <link href="{{ asset('dex/vendor/mdi-font/css/material-design-iconic-font.min.css') }}" rel="stylesheet" media="all">
@@ -115,20 +115,11 @@
         </div>
     </div>
 </form>
-
-
-    <!-- Jquery JS-->
-    <script src="{{ asset('dex/vendor/jquery/jquery.min.js') }}"></script>
-    <!-- Vendor JS-->
-    <script src="{{ asset('dex/vendor/select2/select2.min.js') }}"></script>
-    <script src="{{ asset('dex/vendor/datepicker/moment.min.js') }}"></script>
-    <script src="{{ asset('dex/vendor/datepicker/daterangepicker.js') }}"></script>
-
-    <!-- Main JS-->
-    <script src="{{ asset('dex/js/global.js') }}"></script>
-    <script src="{{ asset('dex/js/toastr.min.js') }}"></script>
-    <script>
-         toastr.options = {
+<script src="{{ asset('dex/js/toastr.min.js') }}"></script>
+<script src="{{ asset('dex/vendor/jquery/jquery.min.js') }}"></script>
+@foreach($errors->all() as $err)
+            <script>
+            toastr.options = {
                 "closeButton": false,
                 "debug": false,
                 "newestOnTop": false,
@@ -144,40 +135,77 @@
                 "hideEasing": "linear",
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
-            }
-        let check = "{{ $ch }}";
-        if (check == "Email Exits") {
-            toastr["error"]("Email Already Exists")
-        }
-        else if(check == "Failed"){
-           
-            var mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
+            }   
+            var msge = "{{ $err }}";     
+            toastr["error"](msge)</script>
+		@endforeach
 
-            let uname = document.getElementById("uname").value;
-            let phone = document.getElementById("phone").value;
-            let email = document.getElementById("email").value;
-            let pass = document.getElementById("pass").value;
-            let confpass = document.getElementById("confpass").value;
-            let bgroup = document.getElementById("bgroup").value;
-            if (uname == "" || uname.length <= 3) {
-                toastr["error"]("Please,Provide Valid UserName(Atleast 4 Characters)")
-            }
-            if (phone.length != 15) {
-                toastr["error"]("Phone Number format Should be +880-xxxxxxxxxxx")
-            }
-            if (email == "" || email.match(mailformat)) {
-                toastr["error"]("Please,Provide Valid Email")
-            }
-            if (pass == "" || pass.length <= 3) {
-                toastr["error"]("Password Length Should be atleast 4 characters")
-            }
-            if (confpass == "" || confpass != pass) {
-                toastr["error"]("Confirm Password doesn't match with Password")
-            }
-            if (bgroup == "") {
-                toastr["error"]("Please select a Blood Group")
-            }
-        }
+
+    <!-- Jquery JS-->
+    <script src="{{ asset('dex/vendor/jquery/jquery.min.js') }}"></script>
+    <!-- Vendor JS-->
+    <script src="{{ asset('dex/vendor/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('dex/vendor/datepicker/moment.min.js') }}"></script>
+    <script src="{{ asset('dex/vendor/datepicker/daterangepicker.js') }}"></script>
+
+    <!-- Main JS-->
+    <script src="{{ asset('dex/js/global.js') }}"></script>
+    <script src="{{ asset('dex/js/toastr.min.js') }}"></script>
+    <script>
+        //  toastr.options = {
+        //         "closeButton": false,
+        //         "debug": false,
+        //         "newestOnTop": false,
+        //         "progressBar": false,
+        //         "positionClass": "toast-top-right",
+        //         "preventDuplicates": false,
+        //         "onclick": null,
+        //         "showDuration": "300",
+        //         "hideDuration": "1000",
+        //         "timeOut": "5000",
+        //         "extendedTimeOut": "1000",
+        //         "showEasing": "swing",
+        //         "hideEasing": "linear",
+        //         "showMethod": "fadeIn",
+        //         "hideMethod": "fadeOut"
+        //     }
+        //let check = "{{ $errors }}";
+
+        // for (i=0, i< check.length,i++){
+        //     toastr["error"]()
+        // }
+        //if (check == "Email Exits") {
+        //     toastr["error"]("Email Already Exists")
+        // }
+        // else if(check == "Failed"){
+           
+        //     var mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
+
+        //     let uname = document.getElementById("uname").value;
+        //     let phone = document.getElementById("phone").value;
+        //     let email = document.getElementById("email").value;
+        //     let pass = document.getElementById("pass").value;
+        //     let confpass = document.getElementById("confpass").value;
+        //     let bgroup = document.getElementById("bgroup").value;
+        //     if (uname == "" || uname.length <= 3) {
+        //         toastr["error"]("Please,Provide Valid UserName(Atleast 4 Characters)")
+        //     }
+        //     if (phone.length != 15) {
+        //         toastr["error"]("Phone Number format Should be +880-xxxxxxxxxxx")
+        //     }
+        //     if (email == "" || email.match(mailformat)) {
+        //         toastr["error"]("Please,Provide Valid Email")
+        //     }
+        //     if (pass == "" || pass.length <= 3) {
+        //         toastr["error"]("Password Length Should be atleast 4 characters")
+        //     }
+        //     if (confpass == "" || confpass != pass) {
+        //         toastr["error"]("Confirm Password doesn't match with Password")
+        //     }
+        //     if (bgroup == "") {
+        //         toastr["error"]("Please select a Blood Group")
+        //     }
+      //  }
     </script>
 
 </body>
