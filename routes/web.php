@@ -30,4 +30,9 @@ Route::post('/pincode','HomeController@CheckPin');
 
 Route::get('/social','HomeController@LoadFacebook');
 
+Route::get('/userdash', 'UserController@UserDash')->name('user.userdash');
+
+Route::get('/appointment/{id}', 'UserController@DoctorDetails')->name('user.doctor');
+
+
 //Route::get('/dashboard','HomeController@FacebookResponse')->name('teacher.dashboard');

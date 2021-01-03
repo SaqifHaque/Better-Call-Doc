@@ -40,7 +40,7 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">User Name</label>
-                                    <input id="uname" class="input--style-4" type="text" name="username" value="{{ old('username') }}">
+                                    <input id="uname" class="input--style-4" type="text" name="name" value="{{ old('name') }}">
                                 </div>
                             </div>
                             <div class="col-2">
@@ -64,11 +64,11 @@
                                     <label class="label">Gender</label>
                                     <div class="p-t-10">
                                         <label class="radio-container m-r-45">Male
-                                            <input type="radio" checked="checked" name="gender">
+                                            <input type="radio" checked="checked" name="gender" value="Male">
                                             <span class="checkmark"></span>
                                         </label>
                                         <label class="radio-container">Female
-                                            <input type="radio" name="gender">
+                                            <input type="radio" name="gender" value="Female">
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
@@ -115,11 +115,18 @@
         </div>
     </div>
 </form>
-<script src="{{ asset('dex/js/toastr.min.js') }}"></script>
-<script src="{{ asset('dex/vendor/jquery/jquery.min.js') }}"></script>
-@foreach($errors->all() as $err)
-            <script>
-            toastr.options = {
+    <!-- Jquery JS-->
+    <script src="{{ asset('dex/vendor/jquery/jquery.min.js') }}"></script>
+    <!-- Vendor JS-->
+    <script src="{{ asset('dex/vendor/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('dex/vendor/datepicker/moment.min.js') }}"></script>
+    <script src="{{ asset('dex/vendor/datepicker/daterangepicker.js') }}"></script>
+
+    <!-- Main JS-->
+    <script src="{{ asset('dex/js/global.js') }}"></script>
+    <script src="{{ asset('dex/js/toastr.min.js') }}"></script>
+    <script>
+         toastr.options = {
                 "closeButton": false,
                 "debug": false,
                 "newestOnTop": false,
@@ -135,77 +142,46 @@
                 "hideEasing": "linear",
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
-            }   
-            var msge = "{{ $err }}";     
-            toastr["error"](msge)</script>
-		@endforeach
-
-
-    <!-- Jquery JS-->
-    <script src="{{ asset('dex/vendor/jquery/jquery.min.js') }}"></script>
-    <!-- Vendor JS-->
-    <script src="{{ asset('dex/vendor/select2/select2.min.js') }}"></script>
-    <script src="{{ asset('dex/vendor/datepicker/moment.min.js') }}"></script>
-    <script src="{{ asset('dex/vendor/datepicker/daterangepicker.js') }}"></script>
-
-    <!-- Main JS-->
-    <script src="{{ asset('dex/js/global.js') }}"></script>
-    <script src="{{ asset('dex/js/toastr.min.js') }}"></script>
-    <script>
-        //  toastr.options = {
-        //         "closeButton": false,
-        //         "debug": false,
-        //         "newestOnTop": false,
-        //         "progressBar": false,
-        //         "positionClass": "toast-top-right",
-        //         "preventDuplicates": false,
-        //         "onclick": null,
-        //         "showDuration": "300",
-        //         "hideDuration": "1000",
-        //         "timeOut": "5000",
-        //         "extendedTimeOut": "1000",
-        //         "showEasing": "swing",
-        //         "hideEasing": "linear",
-        //         "showMethod": "fadeIn",
-        //         "hideMethod": "fadeOut"
-        //     }
-        //let check = "{{ $errors }}";
-
-        // for (i=0, i< check.length,i++){
-        //     toastr["error"]()
-        // }
-        //if (check == "Email Exits") {
-        //     toastr["error"]("Email Already Exists")
-        // }
-        // else if(check == "Failed"){
+            }
+        let check = "{{ $errors ?? ''}}";
+        for (var i = 0; i < check.length; i++){
+            {
+                //alert(check[i]);
+                toastr["error"](check[i]);
+            }
+    //     alert(check);
+    //     if (check == "Email Exits") {
+    //         toastr["error"]("Email Already Exists")
+    //     }
+    //     else if(check == "Failed"){
            
-        //     var mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
+    //         var mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
 
-        //     let uname = document.getElementById("uname").value;
-        //     let phone = document.getElementById("phone").value;
-        //     let email = document.getElementById("email").value;
-        //     let pass = document.getElementById("pass").value;
-        //     let confpass = document.getElementById("confpass").value;
-        //     let bgroup = document.getElementById("bgroup").value;
-        //     if (uname == "" || uname.length <= 3) {
-        //         toastr["error"]("Please,Provide Valid UserName(Atleast 4 Characters)")
-        //     }
-        //     if (phone.length != 15) {
-        //         toastr["error"]("Phone Number format Should be +880-xxxxxxxxxxx")
-        //     }
-        //     if (email == "" || email.match(mailformat)) {
-        //         toastr["error"]("Please,Provide Valid Email")
-        //     }
-        //     if (pass == "" || pass.length <= 3) {
-        //         toastr["error"]("Password Length Should be atleast 4 characters")
-        //     }
-        //     if (confpass == "" || confpass != pass) {
-        //         toastr["error"]("Confirm Password doesn't match with Password")
-        //     }
-        //     if (bgroup == "") {
-        //         toastr["error"]("Please select a Blood Group")
-        //     }
-      //  }
+    //         let uname = document.getElementById("uname").value;
+    //         let phone = document.getElementById("phone").value;
+    //         let email = document.getElementById("email").value;
+    //         let pass = document.getElementById("pass").value;
+    //         let confpass = document.getElementById("confpass").value;
+    //         let bgroup = document.getElementById("bgroup").value;
+    //         if (uname == "" || uname.length <= 3) {
+    //             toastr["error"]("Please,Provide Valid UserName(Atleast 4 Characters)")
+    //         }
+    //         if (phone.length != 15) {
+    //             toastr["error"]("Phone Number format Should be +880-xxxxxxxxxxx")
+    //         }
+    //         if (email == "" || email.match(mailformat)) {
+    //             toastr["error"]("Please,Provide Valid Email")
+    //         }
+    //         if (pass == "" || pass.length <= 3) {
+    //             toastr["error"]("Password Length Should be atleast 4 characters")
+    //         }
+    //         if (confpass == "" || confpass != pass) {
+    //             toastr["error"]("Confirm Password doesn't match with Password")
+    //         }
+    //         if (bgroup == "") {
+    //             toastr["error"]("Please select a Blood Group")
+    //         }
+    //    }
     </script>
 
 </body>

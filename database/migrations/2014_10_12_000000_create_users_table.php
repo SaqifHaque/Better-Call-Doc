@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('blood_group');
-            $table->string('phone_number')->unique();
+            $table->string('phone_number');
             $table->string('profile_pic')->nullable();
             $table->string('type');
             $table->string('status');

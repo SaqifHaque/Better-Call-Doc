@@ -7,8 +7,10 @@ use Laravel\Socialite\Facades\Socialite;
 use App\User;
 use \Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Validator;
-use Mailgun\Mailgun;
 use App\Rules\Email;
+require '../vendor/autoload.php';
+use Mailgun\Mailgun;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -18,9 +20,9 @@ class HomeController extends Controller
         return view('home.login', ["auth" => $auth]);
     }
 
-    public function Pincode()
+    public function Pincode(Request $req)
     {
-        if($request->session()->has('pin')){
+        if($req->session()->has('pin')){
             return view('home.pincode');
         }
         else{
@@ -29,10 +31,10 @@ class HomeController extends Controller
     }
     public function CheckPin(Request $req)
     {
-        if($req->Pincode == $request->session()->get('pin') ){
+        if($req->pincode == $req->session()->get('pin') ){
 
             $user = DB::table('users')
-            ->where('email',$request->session()->get('verify'))->first();
+            ->where('email',$req->session()->get('verify'))->first();
             $user->status = "Verified";
             if ($user->save()) {
                 return redirect()->route('home.login');
@@ -45,37 +47,35 @@ class HomeController extends Controller
 
     public function Registration()
     {
-       // $ch = "";
-        return view('home.registration');
+        $ch = "";
+        return view('home.registration', ["ch" => $ch]);
     }
 
     public function Register(Request $req)
     {
-        // $ch="";
-        // $check = User::where('email', $req->email)
-        //                 ->first();
-        // if($check){
-        //     $this->ch = "Email Exits";
-        //     return view('home.registration', ["ch" => $ch]);
-        // }
+        $ch="";
+        $check = User::where('email', $req->email)
+                        ->first();
+        if($check){
+            $this->ch = "Email Exits";
+            return view('home.registration', ["ch" => $ch]);
+        }
         $validator = Validator::make($req->all(), [
             'name' => 'required|min:4',
-            'email' => 'required|unique:users,email|email:rfc,dns',
-            'blood_group' => 'required',
-            'phone_number' => 'required|min:15|max:15',
-            'gender' => 'required',
+            'email' => 'required|email',
+            'bloodgroup' => 'required',
+            'phone' => 'required|min:15|max:15',
             'password' => 'required|same:confirmpass',
             'confirmpass' => 'required'
         ]);
         
         if ($validator->fails()) {
-           // $ch = "Failed";
-           return redirect()->route('home.registration')
-           ->with('errors', $validator->errors())
-           ->withInput();
+            $ch = "Failed";
+            //return view('home.registration', ["ch" => $ch]);
+            return redirect()->route('home.registration')->with('errors',$validator->errors()->all())->withInput();
         }else{
         $user = new User();
-        $user->name                       = $req->username;
+        $user->name                       = $req->name;
         $user->email                        = $req->email;
         $user->blood_group            = $req->bloodgroup;
         $user->phone_number        = $req->phone;
@@ -87,14 +87,13 @@ class HomeController extends Controller
         if ($user->save()) {
             $pin = rand(1000,9999);
             $req->session()->put('pin', $pin);
-            $req->session()->put('verify', $user->email);
+            $req->session()->put('verify', $req->email);
 
             $mgClient = new Mailgun(env('MAILGUN_API_KEY'));
             $domain = env('MAILGUN_DOMAIN');
-            return redirect()->route('home.pincode');
             $result = $mgClient->sendMessage($domain, array(
                 'from'	=> 'BetterCallDoc',
-                'to'	=> $user->email,
+                'to'	=> $req->email,
                 'subject' => 'Email verification',
                 'text'	=> 'Your Pincode is: '+ $pin
             ));
