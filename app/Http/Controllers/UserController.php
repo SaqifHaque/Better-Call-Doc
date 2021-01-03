@@ -52,17 +52,29 @@ class UserController extends Controller
             array_push($time, $t);
             $startTime = strval((int)$startTime+1);
         }
+        $avg = 0;
         $ratings=DB::table('ratings')
                     ->join('users','ratings.user_id','=','users.id')
                     ->select('ratings.*','users.*')
-                    ->where('ratings.doctor_id','=',$doctor->$id)
+                    ->where('ratings.doctor_id','=',$doctor->id)
                     ->get();
-
+        for($j=0;$j<count($ratings);$j++){
+            $avg+=(int)$ratings[$j]->rating;
+        }
+        if($avg!=0){
+            $avg = $avg/count($ratings);
+        }
+        
         return View("user.appointment")
                     ->with('doctor',$doctor)
                     ->with("availability",$availability)
                     ->with("time",$time)
-                    ->with("ratings",$ratings);
+                    ->with("ratings",$ratings)
+                    ->with("avg",$avg);
+    }
+    public function TakeAppointment()
+    {
+        
     }
 
 

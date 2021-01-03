@@ -20,7 +20,7 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link href="../../assets/Index/js/toastr.min.css" rel="stylesheet">
+    <link href="{{ asset('dex/js/toastr.min.css') }}" rel="stylesheet">
     <style>
         .modal {
             transition: opacity 0.25s ease;
@@ -95,8 +95,11 @@
                 <div class="py-4">
                     <p class="text-indigo-600 text-xl font-bold">
                         Rating:
-                        <%= avg %>
-
+                        @if($avg==0)
+                            Not Rated
+                        @else
+                            {{ $avg }}
+                        @endif
                     </p>
                 </div>
             </div>
@@ -137,80 +140,11 @@
             </p>
         </div>
         @endforeach 
-            <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
-                <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
-
-                <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-
-                    <div class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
-                        <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                  <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-                </svg>
-                    </div>
-
-                    <!-- Add margin if you want to see some of the overlay behind the modal-->
-                    <div class="modal-content py-4 text-left px-6">
-                        <!--Title-->
-                        <div class="flex justify-between items-center pb-3">
-                            <p class="text-2xl font-bold">Proceed Payment</p>
-                            <div onclick="toggleModal()" class="modal-close cursor-pointer z-50">
-                                <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                      <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-                    </svg>
-                            </div>
-                        </div>
-
-                        <!--Body-->
-                        <form method="POST">
-                            <label for="">Appoinment Date</label>
-                            <input id="ap_date" name="app_date" type="text" class="w-full shadow-sm" readonly>
-                            <label for="">Appoinment Time</label>
-                            <input id="ap_time" name="app_time" type="text" class="w-full shadow-sm" readonly>
-                            <label for="">Visiting Cost</label>
-                            <input name="cost" type="text" class="w-full shadow-sm" value="<%=charge%>" readonly>
-
-                            <% if(status != "check"){ %>
-                                <span class="text-gray-700 mt-2">Payment Type</span>
-                                <div class="mt-2">
-                                    <div id="myRadioGroup" class="space-x-4">
-                                        <label class="inline-flex items-center">
-                                <input type="radio" class="form-radio" name="cash" checked="checked" value="bkash" />
-                                <span class="ml-2">Bkash</span>
-                            </label>
-                                        <label class="inline-flex items-center">
-                                <input type="radio" class="form-radio" name="cash" value="cash" />
-                                <span class="ml-2">Cash on check up</span>
-                            </label>
-
-                                        <div class="mt-2">
-                                            <div id="cashbkash" class="desc">
-                                                Pay On XXX-XXX-XXX-XX then provide the bkash transaction Id.
-                                                <input id="tran" name="tran" type="text" class="w-full shadow-sm bg-gray-100"> </div>
-                                            <div id="Cars3" class="desc" style="display: none;">
-                                                <!-- Cash on check up -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <%  } %>
-
-                                        <!--Footer-->
-                                        <div class="flex justify-end pt-2">
-                                            <button id="btn" type="submit" class="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Proceed</button>
-                                        </div>
-
-                                </div>
-                        </form>
-                    </div>
-                </div>
-
                 <!-- Bootstrap core JavaScript -->
                 <!-- <script src="../../assets/Home/vendor/jquery/jquery.min.js"></script>
     <script src="../../assets/Home/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
-                <script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
-                <script src="../../assets/Index/js/toastr.min.js"></script>
-                <script>
-                    $("#navbar").load("../navbar");
-                </script>
+                <script src="{{ asset('dex/vendor/jquery/jquery.min.js') }}"></script>
+                <script src="{{ asset('dex/js/toastr.min.js') }}"></script>
                 <script>
                     toastr.options = {
                         "closeButton": false,
@@ -229,77 +163,7 @@
                         "showMethod": "fadeIn",
                         "hideMethod": "fadeOut"
                     }
-                    var openmodal = document.querySelectorAll('.modal-open')
-                    for (var i = 0; i < openmodal.length; i++) {
-                        openmodal[i].addEventListener('click', function(event) {
-                            event.preventDefault()
-                            if (document.getElementById("date").value != "" && document.getElementById("time").value != "") {
-                                document.getElementById("ap_date").value = document.getElementById("date").value;
-                                document.getElementById("ap_time").value = document.getElementById("time").value;
-                                toggleModal()
-                            }
-                        })
-                    }
-
-                    const overlay = document.querySelector('.modal-overlay')
-                    overlay.addEventListener('click', toggleModal)
-
-                    var closemodal = document.querySelectorAll('.modal-close')
-                    for (var i = 0; i < closemodal.length; i++) {
-                        closemodal[i].addEventListener('click', toggleModal)
-                    }
-
-                    document.onkeydown = function(evt) {
-                        evt = evt || window.event
-                        var isEscape = false
-                        if ("key" in evt) {
-                            isEscape = (evt.key === "Escape" || evt.key === "Esc")
-                        } else {
-                            isEscape = (evt.keyCode === 27)
-                        }
-                        if (isEscape && document.body.classList.contains('modal-active')) {
-                            toggleModal()
-                        }
-                    };
-
-
-                    function toggleModal() {
-                        const body = document.querySelector('body')
-                        const modal = document.querySelector('.modal')
-                        modal.classList.toggle('opacity-0')
-                        modal.classList.toggle('pointer-events-none')
-                        body.classList.toggle('modal-active')
-                    }
-                    document.getElementById("")
-                    $('#button').on('click', function() {
-                        let time = document.getElementById("time").value;
-                        let date = document.getElementById("date").value;
-                        if (time == "") {
-                            toastr["error"]("Please,Set time Of appointment")
-                        }
-                        if (date == "") {
-                            toastr["error"]("Please,Set date Of appointment")
-                        }
-
-                    })
-                    $('#btn').on('click', function() {
-                        var tran = document.getElementById("tran").value;
-                        if (tran == "" || tran.length < 10) {
-                            toastr["error"]("Please,Provide valid transaction Id")
-                        }
-                    })
-                </script>
-                <script>
-                    $(document).ready(function() {
-                        $("input[name$='cash']").click(function() {
-                            var test = $(this).val();
-
-                            $("div.desc").hide();
-                            $("#cash" + test).show();
-                        });
-                    });
-                </script>
-
+                    </script>
 </body>
 
 </html>

@@ -87,10 +87,6 @@
     </table>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
     <script src="../assets/Index/js/toastr.min.js"></script>
-    <script>
-        $("#navbar").load("../userdash/navbar");
-    </script>
-
 
     <!-- <script type="text/javascript" src="Navbar.js"></script> -->
 

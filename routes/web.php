@@ -34,5 +34,6 @@ Route::get('/userdash', 'UserController@UserDash')->name('user.userdash');
 
 Route::get('/appointment/{id}', 'UserController@DoctorDetails')->name('user.doctor');
 
+Route::get('/search/{str}', 'MicroServiceController@Search')->name('user.search');
 
-//Route::get('/dashboard','HomeController@FacebookResponse')->name('teacher.dashboard');
+
