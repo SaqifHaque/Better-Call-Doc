@@ -143,45 +143,26 @@
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
             }
-        let check = "{{ $errors ?? ''}}";
-        for (var i = 0; i < check.length; i++){
-            {
-                //alert(check[i]);
-                toastr["error"](check[i]);
-            }
-    //     alert(check);
-    //     if (check == "Email Exits") {
-    //         toastr["error"]("Email Already Exists")
-    //     }
-    //     else if(check == "Failed"){
-           
-    //         var mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
-
-    //         let uname = document.getElementById("uname").value;
-    //         let phone = document.getElementById("phone").value;
-    //         let email = document.getElementById("email").value;
-    //         let pass = document.getElementById("pass").value;
-    //         let confpass = document.getElementById("confpass").value;
-    //         let bgroup = document.getElementById("bgroup").value;
-    //         if (uname == "" || uname.length <= 3) {
-    //             toastr["error"]("Please,Provide Valid UserName(Atleast 4 Characters)")
-    //         }
-    //         if (phone.length != 15) {
-    //             toastr["error"]("Phone Number format Should be +880-xxxxxxxxxxx")
-    //         }
-    //         if (email == "" || email.match(mailformat)) {
-    //             toastr["error"]("Please,Provide Valid Email")
-    //         }
-    //         if (pass == "" || pass.length <= 3) {
-    //             toastr["error"]("Password Length Should be atleast 4 characters")
-    //         }
-    //         if (confpass == "" || confpass != pass) {
-    //             toastr["error"]("Confirm Password doesn't match with Password")
-    //         }
-    //         if (bgroup == "") {
-    //             toastr["error"]("Please select a Blood Group")
-    //         }
-    //    }
+        let check = @json($errors);
+        if(check.name)
+        {
+           toastr["error"](check.name); 
+        }
+        if(check.email){
+           toastr["error"](check.email);
+        }
+        if(check.bloodgroup){
+           toastr["error"](check.bloodgroup);
+        }
+        if(check.phone){
+           toastr["error"](check.phone);
+        }
+        if(check.password){
+           toastr["error"](check.password);
+        }
+        if(check.confirmpass){
+            toastr["error"](check.confirmpass);
+        }
     </script>
 
 </body>

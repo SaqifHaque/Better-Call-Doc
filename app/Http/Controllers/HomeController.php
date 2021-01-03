@@ -23,7 +23,8 @@ class HomeController extends Controller
     public function Pincode(Request $req)
     {
         if($req->session()->has('pin')){
-            return view('home.pincode');
+            $msg="";
+            return view('home.pincode',["msg" => $msg]);
         }
         else{
             return redirect()->route('home.login');
@@ -34,14 +35,17 @@ class HomeController extends Controller
         if($req->pincode == $req->session()->get('pin') ){
 
             $user = DB::table('users')
-            ->where('email',$req->session()->get('verify'))->first();
-            $user->status = "Verified";
-            if ($user->save()) {
+            ->where('email',$req->session()->get('verify'))->update(['status' => "Verified"]);
+            if ($user) {
+                $request->session()->forget('pin');
                 return redirect()->route('home.login');
             }
+            $msg="Server Error";
+            return view('home.pincode',["msg" => $msg]);
         }
         else{
-            return redirect()->route('home.login');
+            $msg="Invalid OTP";
+            return view('home.pincode',["msg" => $msg]);
         }
     }
 
@@ -90,7 +94,8 @@ class HomeController extends Controller
             $req->session()->put('pin', $pin);
             $req->session()->put('verify', $req->email);
 
-            Mail::raw('Your Email Verification Code: '+$pin, function($message) use ($user)
+
+            Mail::raw('Your Email Verification Code: '.strval($pin), function($message) use ($user)
             {
                 $message->subject('Email Verification!');
                 $message->from('no-reply@bettercalldoc.com', 'BetterCallDoc');
