@@ -77,7 +77,7 @@ class HomeController extends Controller
             $ch = "Failed";
             echo $validator->errors();
             //return view('home.registration', ["ch" => $ch]);
-            return redirect()->route('home.registration')->with('errors',$validator->errors());
+            return redirect()->route('home.registration')->with('errors',$validator->errors())->withInput();
         }else{
         $user = new User();
         $user->name                       = $req->name;

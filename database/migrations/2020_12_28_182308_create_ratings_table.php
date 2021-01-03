@@ -21,6 +21,7 @@ class CreateRatingsTable extends Migration
                         ->constrained()
                         ->onUpdate('cascade')
                         ->onDelete('cascade');
+            $table->foreignId('doctor_id');
         });
     }
 

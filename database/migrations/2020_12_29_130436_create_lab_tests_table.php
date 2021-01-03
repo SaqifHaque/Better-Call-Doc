@@ -19,7 +19,6 @@ class CreateLabTestsTable extends Migration
             $table->string('date');
             $table->string('file_name');
             $table->string('file_path');
-            $table->timestamps();
             $table->foreignId('user_id')
                         ->constrained()
                         ->onUpdate('cascade')

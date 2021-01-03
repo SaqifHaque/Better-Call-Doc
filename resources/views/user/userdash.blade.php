@@ -63,7 +63,7 @@
 
         <div id="doctor" class="grid md:grid-cols-3 gap-8 m-5 max-w-5xl m-auto">
         @foreach($doctors as $doc)
-                <div class="bg-white rounded shadow-md">
+                <div class="transition duration-500 ease-in-out bg-white rounded shadow-md transform hover:-translate-y-1 hover:scale-110 ...">
                     <img src="{{$doc->profile_pic}}" alt="" class="w-full h-48 sm:h-56 object-cover" />
 
                     <div class="px-10 py-6 mb-10 text-center">
@@ -83,7 +83,7 @@
                         <!-- <br>
                             <span class="text-sm"><%= sub.email %></span> -->
                     </div>
-                    <button onclick="window.location.href='{{route('user.doctor', $doc->id)}}'" class="w-full text-lg h-16 text-white font-extrabold bg-purple-700 hover:bg-purple-900">Take Appointment</button>
+                    <button onclick="window.location.href='{{route('user.doctor', $doc->id)}}'" class="transition duration-500 ease-out-in w-full text-lg h-16 text-white font-extrabold bg-purple-700 hover:w-full text-lg h-16 text-white font-extrabold bg-red-400 transform hover:-translate-y-1 hover:scale-110 ...">Take Appointment</button>
                 </div>
                 @endforeach
         </div>

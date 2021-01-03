@@ -21,12 +21,48 @@ class UserController extends Controller
         ->join('users','doctors.user_id','=','users.id')
         ->select('doctors.*','users.*')
         ->where('doctors.user_id','=',$id)
-        ->get();
-        $date = date("l");
-        echo $date;
+        ->first();
+        $splitweek = explode(',', $doctor->availability);
+        $current = Carbon::now();
+        $availability = array();
+        $time = array();
+        $week = $current->format('l');
+            if(in_array($week, $splitweek))
+            {
+                array_push($availability, $current->toDateString());
+            }
+        for($i=0; $i<=20; $i++){
+            $date = $current->addDays(1);
+            $week = $date->format('l');
+            if(in_array($week, $splitweek))
+            {
+                array_push($availability, $date->toDateString());
+            }
+        }
+        $splitime = explode('-', $doctor->time);
+        $start = explode(':', $splitime[0]);
+        $end = explode(':', $splitime[1]);
 
+        $startTime = $start[0];
+        $endTime = $end[0];
 
-        return View("user.appointment")->with('doctor',$doctor);
+        while($startTime!=$endTime)
+        {
+            $t = $startTime.":00-".strval((int)$startTime+1).":00";
+            array_push($time, $t);
+            $startTime = strval((int)$startTime+1);
+        }
+        $ratings=DB::table('ratings')
+                    ->join('users','ratings.user_id','=','users.id')
+                    ->select('ratings.*','users.*')
+                    ->where('ratings.doctor_id','=',$doctor->$id)
+                    ->get();
+
+        return View("user.appointment")
+                    ->with('doctor',$doctor)
+                    ->with("availability",$availability)
+                    ->with("time",$time)
+                    ->with("ratings",$ratings);
     }
 
 

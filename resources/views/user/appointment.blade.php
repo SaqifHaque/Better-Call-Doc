@@ -46,43 +46,42 @@
         </div>
         <div class="space-y-4">
             <h4>Username:
-                {{$doctor[0]->name}}
+                {{$doctor->name}}
             </h4>
             <br>
             <h4>Specialization:
-            {{$doctor[0]->specilization}}
+            {{$doctor->specilization}}
             </h4>
             <br>
             <h4>Email:
-            {{$doctor[0]->email}}
+            {{$doctor->email}}
             </h4>
             <br>
             <h4>availability:
-            {{$doctor[0]->availability}}
+            {{$doctor->availability}}
             </h4>
             <br>
             <h4>Time:
-            {{$doctor[0]->time}}
+            {{$doctor->time}}
             </h4>
             <br>
             <h4>Visiting Cost:   
-                    <span class="text-blue-600"> {{$doctor[0]->charge}}</span>
+                    <span class="text-blue-600"> {{$doctor->charge}}</span>
             </h4>
             <br>
             <div class="rs-select2 js-select-simple select--no-search">
                 <select id="date" name="date">
             <option name="date" value="" selected="selected">Choose Date</option>
-            <% for(const d of date){ %>
-                <option value="<%= d %>"><%= d %></option> 
-                <% } %>
+            @foreach($availability as $d)
+                <option value="{{ $d }}">{{ $d }}</option> 
+               @endforeach
            
         </select>
                 <select id="time" name="time">
             <option name="time" value="" selected="selected">Choose Time</option>
-            <% for(const t of time){ %>
-                <option value="<%= t
-                 %>"><%= t %></option> 
-                <% } %>       
+            @foreach($time as $t)
+                <option value="{{ $t }}">{{ $t }}</option> 
+                 @endforeach      
         </select>
                 <div class="mt-8">
                     <button id="button" type="button" class="modal-open inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -106,7 +105,7 @@
 
     </div>
     <!-- component -->
-    <% for(const r of reviews){ %>
+    @foreach($ratings as $r)
         <div class="flex items-start p-4">
             <div class="flex-shrink-0">
                 <div class="inline-block relative">
@@ -121,9 +120,9 @@
             </div>
             <div class="ml-6">
                 <p class="flex items-baseline">
-                    <span class="text-indigo-600 font-bold text-xl"><%= r.username %></span>
+                    <span class="text-indigo-600 font-bold text-xl">{{ $r->name}}</span>
                 </p>
-                <span class="text-gray-600 font-bold"><%= r.rating %> out of 5</span>
+                <span class="text-gray-600 font-bold">{{ $r->rating }} out of 5</span>
 
             </div>
 
@@ -134,10 +133,10 @@
 
             </span>
             <p class="mt-1">
-                <%= r.review %>
+                {{ $r->review }}
             </p>
         </div>
-        <% } %>
+        @endforeach 
             <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
                 <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
