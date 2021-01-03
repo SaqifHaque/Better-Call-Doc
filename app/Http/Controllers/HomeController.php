@@ -9,7 +9,7 @@ use \Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Validator;
 use App\Rules\Email;
 require '../vendor/autoload.php';
-use Mailgun\Mailgun;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -71,8 +71,9 @@ class HomeController extends Controller
         
         if ($validator->fails()) {
             $ch = "Failed";
+            echo $validator->errors();
             //return view('home.registration', ["ch" => $ch]);
-            return redirect()->route('home.registration')->with('errors',$validator->errors()->all())->withInput();
+            return redirect()->route('home.registration')->with('errors',$validator->errors());
         }else{
         $user = new User();
         $user->name                       = $req->name;
@@ -89,19 +90,13 @@ class HomeController extends Controller
             $req->session()->put('pin', $pin);
             $req->session()->put('verify', $req->email);
 
-            $mgClient = new Mailgun(env('MAILGUN_API_KEY'));
-            $domain = env('MAILGUN_DOMAIN');
-            $result = $mgClient->sendMessage($domain, array(
-                'from'	=> 'BetterCallDoc',
-                'to'	=> $req->email,
-                'subject' => 'Email verification',
-                'text'	=> 'Your Pincode is: '+ $pin
-            ));
-            If($result){
-                return redirect()->route('home.pincode');
-            }else{
-                echo "Server Error";
-            }
+            Mail::raw('Your Email Verification Code: '+$pin, function($message) use ($user)
+            {
+                $message->subject('Email Verification!');
+                $message->from('no-reply@bettercalldoc.com', 'BetterCallDoc');
+                $message->to($user->email);
+            });
+            return redirect()->route('home.pincode');
         }
 
         else{
