@@ -8,18 +8,19 @@ use App\User;
 use App\Doctor;
 
 
-class UserController extends Controller
+class AdminController extends Controller
 {
 
     public function admindash(){
         $user= User::all();
-        return view('admindash');
+        
+        return view('admin.admindash');
     }
 
     public function index()
     {
         $users= User::all();
-        return view('user-list', compact('users'));
+        return view('admin.user-list', compact('users'));
        
     }
 
@@ -51,7 +52,7 @@ class UserController extends Controller
             $doctor->charge = $request->charge;
             $doctor->save();
 
-            return redirect('/')->with('success', 'Doctor has been saved');
+            return redirect('/admindash')->with('success', 'Doctor has been saved');
         }
         else{
             $this->validateUser();
@@ -70,7 +71,7 @@ class UserController extends Controller
                 $user->profile_pic = $filename;
             }
             $user->save();
-            return redirect('/')->with('success', 'User has been saved');
+            return redirect('/admindash')->with('success', 'User has been saved');
         }
     }
     public function validateDoctor()
@@ -109,16 +110,9 @@ class UserController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
     }
-
-    public function show($id)
-    {
-        //
-    }
-
-
     public function edit(User $user)
     {
-        return view('edit-doctor',compact('user'));
+        return view('admin.edit-doctor',compact('user'));
     }
 
 
@@ -127,11 +121,11 @@ class UserController extends Controller
         if($request->type === "Doctor"){
             $user->update( $this->updateValidationUser());
             $doctor->update( $this->updateValidationDoctor());
-            return redirect()->route('user-list');
+            return redirect()->route('admin.user-list');
         }
         else{
             $user->update( $this->updateValidationUser());
-            return redirect()->route('user-list');
+            return redirect()->route('admin.user-list');
         }
   
     }

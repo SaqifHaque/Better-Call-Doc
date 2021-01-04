@@ -118,7 +118,7 @@
     }
     $('#notify').on('click', function() {
         $.ajax({
-            url: '/userdash/notice',
+            url: '/api/notices',
             method: 'get',
             dataType: 'json',
             success: function(data) {

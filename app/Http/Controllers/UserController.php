@@ -108,7 +108,8 @@ class UserController extends Controller
         $appointments = DB::table('appointments')
                                             ->join('doctors','appointments.doctor_id','=','doctors.id')
                                             ->select('appointments.*','doctors.*')
-                                            ->where('user_id',$req->session->get("id"));
+                                            ->where('user_id',$req->session->get("id"))
+                                            ->first();
         return View("user.apptable")->with("app",$appointments);
     } 
 }
