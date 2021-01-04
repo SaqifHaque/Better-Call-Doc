@@ -54,4 +54,8 @@ Route::post('/appointment/{appoinment}/approve', 'AppoinmentController@approveAp
 Route::post('/appointment/{appoinment}/cancel', 'AppoinmentController@cancelAppointmentStatus');
 Route::get('/appointment-list', 'AppoinmentController@appointments');
 
+//doctor
+Route::get('/doctordash', 'DoctorController@doctorDash')->name('doctordash');
+
+
 
