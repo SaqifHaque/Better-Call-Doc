@@ -74,7 +74,7 @@ class HomeController extends Controller
         $user->email                        = $req->email;
         $user->blood_group            = $req->bloodgroup;
         $user->phone_number        = $req->phone;
-        $user->type                         = "User";
+        $user->type                         = "Patient";
         $user->status                       = "Unverified";
         $user->gender                      = $req->gender;
         $user->password                 = $req->password;

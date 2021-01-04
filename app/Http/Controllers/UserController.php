@@ -84,33 +84,26 @@ class UserController extends Controller
         ]);
         
         if ($validator->fails()) {
-            //return view('home.registration', ["ch" => $ch]);
             return redirect()->route('user.doctor',[$doctor->id])->with('errors',$validator->errors())->withInput();
         }
         else{
-        $appoinment = new Appoinment();
-        $appoinment->date = $req->date;
-        $appoinment->time = $req->time;
-        $appoinment->status ="Pending";
-        //$appoinment->user_id = $req->session()->get('id');
-        $appoinment->user_id = 5;
-        $appoinment->doctor_id = $doctor->id;
-        $appoinment->prescription_id = 0;
-        $appoinment->save();
-
+            $appoinment = new Appoinment();
+            $appoinment->date = $req->date;
+            $appoinment->time = $req->time;
+            $appoinment->status ="Pending";
+            $appoinment->user_id = $req->session()->get('id');
+            $appoinment->doctor_id = $doctor->id;
+            $appoinment->prescription_id = 0;
+            $appoinment->save();
+            Mail::raw('Your Appointment has been set'.$req->date." ".$req->time, function($message) use ($user)
+            {
+                $message->subject('Appointment has been Schduled!');
+                $message->from('no-reply@bettercalldoc.com', 'BetterCallDoc');
+                $message->to($req->session()->get('email'));
+            });
         return redirect()->route('user.app');
-     }
-     
-
-        
-        // Mail::raw('Your Appointment has been set', function($message) use ($user)
-        // {
-        //     $message->subject('Appointment has been Schduled!');
-        //     $message->from('no-reply@bettercalldoc.com', 'BetterCallDoc');
-        //     $message->to($req->session()->get('email'));
-        // });
+     }    
     }
-
     public function AppTable(Request $req){
         $appointments = DB::table('appointments')
                                             ->join('doctors','appointments.doctor_id','=','doctors.id')

@@ -16,12 +16,12 @@ class VerifyUserTeacher
     public function handle($request, Closure $next)
     {
 
-        if($request->session()->get('type') == 'Teacher'){
+        if($request->session()->get('type') == 'Patient'){
             return $next($request); 
         }
         else{
             $request->session()->flash('msg', 'Invalid Resource Request, You are not allowed to view this resource.');
-            return redirect()->route('user.login');
+            return redirect()->route('home.login');
         }
     }
     

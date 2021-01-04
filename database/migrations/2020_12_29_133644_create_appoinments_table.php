@@ -18,7 +18,6 @@ class CreateAppoinmentsTable extends Migration
             $table->string('date');
             $table->string('time');
             $table->string('status');
-
             $table->foreignId('user_id')
                         ->constrained()
                         ->onUpdate('cascade')
