@@ -22,6 +22,7 @@ class UserController extends Controller
         ->select('doctors.*','users.*')
         ->where('doctors.user_id','=',$id)
         ->first();
+        
         $splitweek = explode(',', $doctor->availability);
         $current = Carbon::now();
         $availability = array();
@@ -74,7 +75,7 @@ class UserController extends Controller
     }
     public function TakeAppointment()
     {
-        
+
     }
 
 

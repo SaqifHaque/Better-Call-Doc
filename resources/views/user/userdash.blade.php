@@ -17,13 +17,16 @@
     <!-- <link href="assets/Home/css/heroic-features.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link href="../assets/Index/js/toastr.min.css" rel="stylesheet">
+    <link href="{{ asset('dex/js/toastr.min.css') }}" rel="stylesheet">
 
 </head>
 
 <body>
-    <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    </nav>
+    @extends('layout.navbar')
+
+    @section('nav') 
+
+     @endsection
     <!-- Page Content -->
     <div>
         <div class="sliderAx h-auto">
@@ -104,8 +107,8 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+    <script src="{{ asset('dex/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('dex/js/toastr.min.js') }}"></script>
     <script>
         var cont = 0;
 

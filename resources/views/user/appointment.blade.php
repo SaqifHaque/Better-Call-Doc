@@ -35,8 +35,7 @@
 </head>
 
 <body>
-    <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    </nav>
+    @extends(layouts.navbar)
     <div class="flex p-4 space-x-4">
         <!-- <div>
             <img class="object-contain h-30 w-30" src="img_avatar.png" alt="..." class="object-cover h-48 w-full ...">
