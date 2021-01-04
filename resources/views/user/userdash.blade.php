@@ -1,32 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
     <title>Better Call Doc</title>
-
-    <!-- Bootstrap core CSS -->
-    <!-- <link href="assets/Home/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
-
-    <!-- Custom styles for this template -->
-    <!-- <link href="assets/Home/css/heroic-features.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link href="{{ asset('dex/js/toastr.min.css') }}" rel="stylesheet">
-
-</head>
-
-<body>
-    @extends('layout.navbar')
-
-    @section('nav') 
-
-     @endsection
+@include('layout.navbar')
     <!-- Page Content -->
     <div>
         <div class="sliderAx h-auto">
@@ -184,7 +158,3 @@
 
 
     <!-- <script type="text/javascript" src="Navbar.js"></script> -->
-
-</body>
-
-</html>

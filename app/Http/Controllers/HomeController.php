@@ -51,31 +51,21 @@ class HomeController extends Controller
 
     public function Registration()
     {
-        $ch = "";
-        return view('home.registration', ["ch" => $ch]);
+        return view('home.registration');
     }
 
     public function Register(Request $req)
     {
-        $ch="";
-        $check = User::where('email', $req->email)
-                        ->first();
-        if($check){
-            $this->ch = "Email Exits";
-            return view('home.registration', ["ch" => $ch]);
-        }
         $validator = Validator::make($req->all(), [
             'name' => 'required|min:4',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'bloodgroup' => 'required',
-            'phone' => 'required|min:15|max:15',
+            'phone' => 'required|min:15|max:15|unique:users',
             'password' => 'required|same:confirmpass',
             'confirmpass' => 'required'
         ]);
         
         if ($validator->fails()) {
-            $ch = "Failed";
-            echo $validator->errors();
             //return view('home.registration', ["ch" => $ch]);
             return redirect()->route('home.registration')->with('errors',$validator->errors())->withInput();
         }else{

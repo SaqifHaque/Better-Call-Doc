@@ -29,11 +29,7 @@ class CreateAppoinmentsTable extends Migration
                         ->onUpdate('cascade')
                         ->onDelete('cascade');
 
-            $table->foreignId('prescription_id')
-                        ->constrained()
-                        ->onUpdate('cascade')
-                        ->onDelete('cascade')
-                        ->nullable();
+            $table->int('prescription_id');
             $table->timestamps();
         });
     }

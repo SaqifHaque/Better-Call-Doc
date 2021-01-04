@@ -36,4 +36,8 @@ Route::get('/appointment/{id}', 'UserController@DoctorDetails')->name('user.doct
 
 Route::get('/search/{str}', 'MicroServiceController@Search')->name('user.search');
 
+Route::get('/apptable','UserController@AppTable')->name('user.app');
+
+Route::post('/takeappointment/{doctor}', 'UserController@TakeAppointment');
+
 

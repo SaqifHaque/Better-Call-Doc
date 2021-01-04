@@ -1,3 +1,15 @@
+    <head>
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="assets/Home/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <!-- Custom styles for this template -->
+    <!-- <link href="assets/Home/css/heroic-features.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="{{ asset('dex/js/toastr.min.css') }}" rel="stylesheet">
+    
+    </head>
+
 <!-- This example requires Tailwind CSS v2.0+ -->
 <nav class="bg-gray-800">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">

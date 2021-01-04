@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use App\Appoinment;
+use App\Doctor;
 use Illuminate\Http\Request;
 Use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -22,7 +25,7 @@ class UserController extends Controller
         ->select('doctors.*','users.*')
         ->where('doctors.user_id','=',$id)
         ->first();
-        
+
         $splitweek = explode(',', $doctor->availability);
         $current = Carbon::now();
         $availability = array();
@@ -73,10 +76,46 @@ class UserController extends Controller
                     ->with("ratings",$ratings)
                     ->with("avg",$avg);
     }
-    public function TakeAppointment()
-    {
+    public function TakeAppointment( Doctor $doctor, Request $req)
+    {     
+        $validator = Validator::make($req->all(), [
+            'date' => 'required',
+            'time' => 'required',
+        ]);
+        
+        if ($validator->fails()) {
+            //return view('home.registration', ["ch" => $ch]);
+            return redirect()->route('user.doctor',[$doctor->id])->with('errors',$validator->errors())->withInput();
+        }
+        else{
+        $appoinment = new Appoinment();
+        $appoinment->date = $req->date;
+        $appoinment->time = $req->time;
+        $appoinment->status ="Pending";
+        //$appoinment->user_id = $req->session()->get('id');
+        $appoinment->user_id = 5;
+        $appoinment->doctor_id = $doctor->id;
+        $appoinment->prescription_id = 0;
+        $appoinment->save();
 
+        return redirect()->route('user.app');
+     }
+     
+
+        
+        // Mail::raw('Your Appointment has been set', function($message) use ($user)
+        // {
+        //     $message->subject('Appointment has been Schduled!');
+        //     $message->from('no-reply@bettercalldoc.com', 'BetterCallDoc');
+        //     $message->to($req->session()->get('email'));
+        // });
     }
 
-
+    public function AppTable(Request $req){
+        $appointments = DB::table('appointments')
+                                            ->join('doctors','appointments.doctor_id','=','doctors.id')
+                                            ->select('appointments.*','doctors.*')
+                                            ->where('user_id',$req->session->get("id"));
+        return View("user.apptable")->with("app",$appointments);
+    } 
 }

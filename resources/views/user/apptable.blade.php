@@ -36,59 +36,57 @@
             </tr>
         </thead>
         <tbody>
-            <% for(const ap of app ){ %>
+            @foreach($app as ap ){ 
                 <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
                     <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
                         <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Doctor</span>
-                        <%= ap.name %>
+                        {{ ap->name }}
                     </td>
                     <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
                         <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Date</span>
-                        <%= ap.date %>
+                        {{ ap->date }}
                     </td>
                     <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
                         <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Time</span>
-                        <%= ap.time %>
+                        {{ ap->time }}
                     </td>
                     <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
                         <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Status</span>
-                        <% if(ap.status == "pending"){%>
-                            <span class="rounded bg-yellow-200 py-1 px-3 text-xs font-bold"><%= ap.status %></span>
-                            <% } else if(ap.status == "completed"){ %>
-                                <span class="rounded bg-blue-400 py-1 px-3 text-xs font-bold"><%= ap.status %></span>
-                                <% } else if(ap.status == "accepted"){%>
-                                    <span class="rounded bg-green-400 py-1 px-3 text-xs font-bold"><%= ap.status %></span>
-                                    <% } else { %>
-                                        <span class="rounded bg-red-400 py-1 px-3 text-xs font-bold"><%= ap.status %></span>
-                                        <% } %>
+                            @if(ap->status == "pending")
+                            <span class="rounded bg-yellow-200 py-1 px-3 text-xs font-bold">{{ ap->status }}</span>
+                                @elseif(ap->status == "completed")
+                                <span class="rounded bg-blue-400 py-1 px-3 text-xs font-bold">{{ ap->status }}</span>
+                                    @elseif(ap->status == "accepted")
+                                    <span class="rounded bg-green-400 py-1 px-3 text-xs font-bold">{{ ap->status }}</span>
+                                        @else 
+                                        <span class="rounded bg-red-400 py-1 px-3 text-xs font-bold">{{ ap->status }}</span>
+                                        @endif
 
                     </td>
 
                     <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
-                        <% if(ap.status == "completed") { %>
+                        @if(ap->status == "completed") 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Actions</span>
-                            <% if(ap.p_Id != "0") { %>
+                            @if(ap->p_Id != "0")
 
                                 <form method="POST" action="pdf/<%=ap.p_Id%>">
                                     <button type="submit" class="text-blue-400 hover:text-blue-600">Prescription</a>
                             </form>
-                            <% } %>
+                            @endif
                         <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Actions</span>
                         <a href="review/<%=ap.d_Id%>" class="rounded bg-green-400 block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900">Review</a>
-                        <% } else if(ap.status == "pending"){ %>
+                        @elseif(ap->status == "pending")
                             <form method="POST" action="cancel/<%=ap.ap_Id%>">
                                 <button type="submit" class="text-red-400 hover:text-blue-600">Cancel</a>
                         </form>
-                        <% } %>
+                           @endif 
                     </td>
                 </tr>
-                <% } %>
+               @endif
         </tbody>
     </table>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
     <script src="../assets/Index/js/toastr.min.js"></script>
-
-    <!-- <script type="text/javascript" src="Navbar.js"></script> -->
 
 </body>
 
