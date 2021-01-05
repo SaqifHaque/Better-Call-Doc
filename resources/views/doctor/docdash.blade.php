@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Mediqu - Bootstrap Admin Dashboard </title>
+    <title>Doctor Dashboard </title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('doc/images/favicon.png') }}">
     	<link href="{{ asset('doc/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
@@ -50,9 +50,8 @@
             Nav header end
         ***********************************-->
 
-		
-		
-        <!--**********************************
+
+                <!--**********************************
             Header start
         ***********************************-->
         <div class="header">
@@ -61,17 +60,17 @@
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
                             <div class="dashboard_bar">
-                                App Profile
+                                Better Call Doctor
                             </div>
                         </div>
 
                         <ul class="navbar-nav header-right">
-							<li class="nav-item dropdown notification_dropdown">
+                            <li class="nav-item dropdown notification_dropdown">
                                 <a class="nav-link dz-fullscreen" href="#">
                                     <svg id="icon-full" viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
                                     <svg id="icon-minimize" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minimize"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path></svg>
                                 </a>
-							</li>
+                            </li>
                             <li class="nav-item dropdown notification_dropdown">
                                 <a class="nav-link  ai-icon" href="#" role="button" data-toggle="dropdown">
                                     <i class="flaticon-381-ring"></i>
@@ -79,96 +78,92 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <div id="DZ_W_Notification1" class="widget-media dz-scroll p-3" style="height:380px;">
-										<ul class="timeline">
-											<li>
-												<div class="timeline-panel">
-													<div class="media mr-2">
-														<img alt="image" width="50" src="{{ asset('doc/images/avatar/1.jpg') }}">
-													</div>
-													<div class="media-body">
-														<h6 class="mb-1">Dr sultads Send you Photo</h6>
-														<small class="d-block">29 July 2020 - 02:26 PM</small>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="timeline-panel">
-													<div class="media mr-2 media-info">
-														KG
-													</div>
-													<div class="media-body">
-														<h6 class="mb-1">Resport created successfully</h6>
-														<small class="d-block">29 July 2020 - 02:26 PM</small>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="timeline-panel">
-													<div class="media mr-2 media-success">
-														<i class="fa fa-home"></i>
-													</div>
-													<div class="media-body">
-														<h6 class="mb-1">Reminder : Treatment Time!</h6>
-														<small class="d-block">29 July 2020 - 02:26 PM</small>
-													</div>
-												</div>
-											</li>
-											 <li>
-												<div class="timeline-panel">
-													<div class="media mr-2">
-														<img alt="image" width="50" src="{{ asset('doc/images/avatar/1.jpg') }}">
-													</div>
-													<div class="media-body">
-														<h6 class="mb-1">Dr sultads Send you Photo</h6>
-														<small class="d-block">29 July 2020 - 02:26 PM</small>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="timeline-panel">
-													<div class="media mr-2 media-danger">
-														KG
-													</div>
-													<div class="media-body">
-														<h6 class="mb-1">Resport created successfully</h6>
-														<small class="d-block">29 July 2020 - 02:26 PM</small>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="timeline-panel">
-													<div class="media mr-2 media-primary">
-														<i class="fa fa-home"></i>
-													</div>
-													<div class="media-body">
-														<h6 class="mb-1">Reminder : Treatment Time!</h6>
-														<small class="d-block">29 July 2020 - 02:26 PM</small>
-													</div>
-												</div>
-											</li>
-										</ul>
-									</div>
+                                        <ul class="timeline">
+                                            <li>
+                                                <div class="timeline-panel">
+                                                    <div class="media mr-2">
+                                                        <img alt="image" width="50" src="{{ asset('doc/images/avatar/1.jpg') }}">
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h6 class="mb-1">Dr sultads Send you Photo</h6>
+                                                        <small class="d-block">29 July 2020 - 02:26 PM</small>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="timeline-panel">
+                                                    <div class="media mr-2 media-info">
+                                                        KG
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h6 class="mb-1">Resport created successfully</h6>
+                                                        <small class="d-block">29 July 2020 - 02:26 PM</small>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="timeline-panel">
+                                                    <div class="media mr-2 media-success">
+                                                        <i class="fa fa-home"></i>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h6 class="mb-1">Reminder : Treatment Time!</h6>
+                                                        <small class="d-block">29 July 2020 - 02:26 PM</small>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                             <li>
+                                                <div class="timeline-panel">
+                                                    <div class="media mr-2">
+                                                        <img alt="image" width="50" src="{{ asset('doc/images/avatar/1.jpg') }}">
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h6 class="mb-1">Dr sultads Send you Photo</h6>
+                                                        <small class="d-block">29 July 2020 - 02:26 PM</small>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="timeline-panel">
+                                                    <div class="media mr-2 media-danger">
+                                                        KG
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h6 class="mb-1">Resport created successfully</h6>
+                                                        <small class="d-block">29 July 2020 - 02:26 PM</small>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="timeline-panel">
+                                                    <div class="media mr-2 media-primary">
+                                                        <i class="fa fa-home"></i>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h6 class="mb-1">Reminder : Treatment Time!</h6>
+                                                        <small class="d-block">29 July 2020 - 02:26 PM</small>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
                                     <a class="all-notification" href="#">See all notifications <i class="ti-arrow-right"></i></a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-									<div class="header-info">
-										<span>David Morse</span>
-										<small>ADMIN</small>
-									</div>
+                                    <div class="header-info">
+                                        <span>David Morse</span>
+                                        <small>ADMIN</small>
+                                    </div>
                                     <img src="{{ asset('doc/images/profile/pic1.jpg') }}" width="20" alt=""/>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="index" class="dropdown-item ai-icon">
+                                    <a href="app-profile" class="dropdown-item ai-icon">
                                         <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                         <span class="ml-2">Profile </span>
                                     </a>
-                                    <a href="index" class="dropdown-item ai-icon">
-                                        <svg id="icon-inbox" xmlns="http://www.w3.org/2000/svg" class="text-success" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                                        <span class="ml-2">Inbox </span>
-                                    </a>
-                                    <a href="index" class="dropdown-item ai-icon">
+                                    <a href="page-login" class="dropdown-item ai-icon">
                                         <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
                                         <span class="ml-2">Logout </span>
                                     </a>
@@ -179,9 +174,7 @@
                 </nav>
             </div>
         </div>
-        <!--**********************************
-            Header end ti-comment-alt
-        ***********************************-->
+
 
         <!--**********************************
             Sidebar start
@@ -189,10 +182,25 @@
         <div class="deznav">
             <div class="deznav-scroll">
 				<ul class="metismenu" id="menu">
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-381-networking"></i>
-							<span class="nav-text">Dashboard</span>
-						</a>
+                    <li><a style="border:none; " href="">
+                            <i class="flaticon-381-networking"></i>
+                            <span class="nav-text">DashBoard</span>
+                            </a>
+                    </li>
+                    <li><a style="border:none; " href="">
+                            <i class="flaticon-381-internet"></i>
+                            <span class="nav-text">Appointments</span>
+                            </a>
+                    </li>
+                    <li><a style="border:none; " href="">
+                            <i class="flaticon-381-internet"></i>
+                            <span class="nav-text">Patients</span>
+                            </a>
+                    </li>
+                    <li><a style="border:none; " href="">
+                        <i class="flaticon-381-internet"></i>
+                            <span class="nav-text">Patients</span>
+                            </a>
                     </li>
                 </ul>
 			</div>
@@ -206,20 +214,6 @@
         ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
-                <div class="row page-titles mx-0">
-                    <div class="col-sm-6 p-md-0">
-                        <div class="welcome-text">
-                            <h4>Hi, welcome back!</h4>
-                            <p class="mb-0">Your business dashboard template</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">App</a></li>
-                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Profile</a></li>
-                        </ol>
-                    </div>
-                </div>
                 <!-- row -->
                 <div class="row">
                     <div class="col-lg-12">
@@ -255,13 +249,13 @@
                                     <div class="text-center">
                                         <div class="row">
                                             <div class="col">
-                                                <h3 class="m-b-0">150</h3><span>Follower</span>
+                                                <h3 class="m-b-0">150</h3><span>Appointments</span>
                                             </div>
                                             <div class="col">
-                                                <h3 class="m-b-0">140</h3><span>Place Stay</span>
+                                                <h3 class="m-b-0">140</h3><span>Rating</span>
                                             </div>
                                             <div class="col">
-                                                <h3 class="m-b-0">45</h3><span>Reviews</span>
+                                                <h3 class="m-b-0">45</h3><span>Patients</span>
                                             </div>
                                         </div>
                                     </div>
@@ -272,19 +266,92 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal fade none-border" id="event-modal">
+
+                    <!-- Modal Add Category -->
+                    <div class="modal fade none-border" id="add-category">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title"><strong>Add New Event</strong></h4>
+                                    <h4 class="modal-title"><strong>Set Availability</strong></h4>
                                 </div>
-                                <div class="modal-body"></div>
+                                <div class="modal-body">
+                                    <form>
+                                    <div class="form-group">
+                                <label><strong>Weeks :</strong></label><br>
+                                <label><input type="checkbox" name="category[]" value="Sunday"> Sunday</label>
+                                <label><input type="checkbox" name="category[]" value="Monday"> Monday</label>
+                                <label><input type="checkbox" name="category[]" value="Tuesday"> Tuesday</label>
+                                <label><input type="checkbox" name="category[]" value="Wednesday"> Wednesday</label>
+                                <label><input type="checkbox" name="category[]" value="Thursday"> Thursday</label>
+                                <label><input type="checkbox" name="category[]" value="Friday"> Friday</label>
+                                <label><input type="checkbox" name="category[]" value="Saturday"> Saturday</label>
+                            </div>  
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label class="control-label">When</label>
+                                                <select class="form-control form-white" data-placeholder="Choose a color..." name="category-color">
+                                                    <option value="">00:00</option>
+                                                    <option value="danger">01:00</option>
+                                                    <option value="info">02:00</option>
+                                                    <option value="pink">03:00</option>
+                                                    <option value="primary">04:00</option>
+                                                    <option value="warning">05:00</option>
+                                                    <option value="warning">06:00</option>
+                                                    <option value="warning">07:00</option>
+                                                    <option value="warning">08:00</option>
+                                                    <option value="warning">09:00</option>
+                                                    <option value="warning">10:00</option>
+                                                    <option value="warning">11:00</option>
+                                                    <option value="warning">12:00</option>
+                                                    <option value="warning">13:00</option>
+                                                    <option value="warning">14:00</option>
+                                                    <option value="warning">15:00</option>
+                                                    <option value="warning">16:00</option>
+                                                    <option value="warning">17:00</option>
+                                                    <option value="warning">18:00</option>
+                                                    <option value="warning">19:00</option>
+                                                    <option value="warning">20:00</option>
+                                                    <option value="warning">21:00</option>
+                                                    <option value="warning">22:00</option>
+                                                    <option value="warning">23:00</option>
+                                                    <option value="warning">24:00</option>
+                                                </select>                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="control-label">To</label>
+                                                <select class="form-control form-white" data-placeholder="Choose a color..." name="category-color">
+                                                <option value="">00:00</option>
+                                                    <option value="danger">01:00</option>
+                                                    <option value="info">02:00</option>
+                                                    <option value="pink">03:00</option>
+                                                    <option value="primary">04:00</option>
+                                                    <option value="warning">05:00</option>
+                                                    <option value="warning">06:00</option>
+                                                    <option value="warning">07:00</option>
+                                                    <option value="warning">08:00</option>
+                                                    <option value="warning">09:00</option>
+                                                    <option value="warning">10:00</option>
+                                                    <option value="warning">11:00</option>
+                                                    <option value="warning">12:00</option>
+                                                    <option value="warning">13:00</option>
+                                                    <option value="warning">14:00</option>
+                                                    <option value="warning">15:00</option>
+                                                    <option value="warning">16:00</option>
+                                                    <option value="warning">17:00</option>
+                                                    <option value="warning">18:00</option>
+                                                    <option value="warning">19:00</option>
+                                                    <option value="warning">20:00</option>
+                                                    <option value="warning">21:00</option>
+                                                    <option value="warning">22:00</option>
+                                                    <option value="warning">23:00</option>
+                                                    <option value="warning">24:00</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-success save-event waves-effect waves-light">Create
-                                        event</button>
-
-                                    <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-dismiss="modal">Delete</button>
+                                    <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal">Save</button>
                                 </div>
                             </div>
                         </div>
@@ -325,9 +392,7 @@
 
         <!--**********************************
            Support ticket button end
-        ***********************************-->
-
-        
+        ***********************************--> 
     </div>
     <!--**********************************
         Main wrapper end
@@ -352,11 +417,5 @@
     <script src="{{ asset('doc/vendor/chart.js/Chart.bundle.min.js') }}"></script>
     <script src="{{ asset('doc/js/plugins-init/chartjs-init.js') }}"></script>
 
-
-	
-		
 </body>
-
-
-<!-- Mirrored from mediqu.dexignzone.com/xhtml/app-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 03 Jan 2021 14:51:17 GMT -->
 </html>
