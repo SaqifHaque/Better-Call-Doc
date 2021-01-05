@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 // use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
 use Closure;
 
-class VerifyUserTeacher 
+class VerifyPatient
 {
     /**
      * The URIs that should be excluded from User verification.

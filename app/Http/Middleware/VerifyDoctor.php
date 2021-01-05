@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 // use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
 use Closure;
 
-class VerifyUserTeacher 
+class VerifyDoctor 
 {
     /**
      * The URIs that should be excluded from User verification.
@@ -16,7 +16,7 @@ class VerifyUserTeacher
     public function handle($request, Closure $next)
     {
 
-        if($request->session()->get('type') == 'Admin'){
+        if($request->session()->get('type') == 'Doctor'){
             return $next($request); 
         }
         else{

@@ -35,7 +35,7 @@
                         </div>
                         <div class="flex-1 text-right md:text-center">
                             <h5 class="font-bold uppercase text-gray-600 text-xl text-bold">Total Users</h5>
-                            <h3 class="font-bold text-3xl">249 <span class="text-pink-500"><i
+                            <h3 class="font-bold text-3xl">{{ $user }}<span class="text-pink-500"><i
                                         class="fas fa-exchange-alt"></i></span></h3>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
                             </div>
                             <div class="flex-1 text-right md:text-center">
                                 <h5 class="font-bold uppercase text-gray-600 text-xl text-bold">Appoinments List</h5>
-                                <h3 class="font-bold text-3xl">7 tasks</h3>
+                                <h3 class="font-bold text-3xl">{{ $app }} tasks</h3>
                             </div>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                             </div>
                             <div class="flex-1 text-right md:text-center">
                                 <h5 class="font-bold uppercase text-gray-600 text-xl text-bold">Appoinments</h5>
-                                <h3 class="font-bold text-3xl">3 <span class="text-red-500"><i
+                                <h3 class="font-bold text-3xl">{{ $tapp }} <span class="text-red-500"><i
                                             class="fas fa-caret-up"></i></span></h3>
                             </div>
                         </div>
@@ -134,17 +134,17 @@
                 <div class="bg-white border-transparent rounded-lg shadow-xl">
                     <div
                         class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
-                        <h5 class="font-bold uppercase text-gray-600 text-xl text-bold">Graph</h5>
+                        <h5 class="font-bold uppercase text-gray-600 text-xl text-bold">Appointments</h5>
                     </div>
                     <div class="p-5"><canvas id="chartjs-4" class="chartjs" width="undefined" height="undefined"></canvas>
                         <script>
                             new Chart(document.getElementById("chartjs-4"), {
                                 "type": "doughnut",
                                 "data": {
-                                    "labels": ["Admin", "User", "Doctor"],
+                                    "labels": ["Cancelled", "Pending", "Completed"],
                                     "datasets": [{
                                         "label": "Issues",
-                                        "data": [5, 4, 1],
+                                        "data": [{{ $can }}, {{ $app }}, {{ $com }}],
                                         "backgroundColor": ["rgb(255, 99, 132)", "rgb(54, 162, 235)",
                                             "rgb(255, 205, 86)"
                                         ]
@@ -192,17 +192,17 @@
                 <div class="bg-white border-transparent rounded-lg shadow-xl">
                     <div
                         class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
-                        <h5 class="font-bold uppercase text-gray-600 text-xl text-bold">Graph</h5>
+                        <h5 class="font-bold uppercase text-gray-600 text-xl text-bold">User Ratio</h5>
                     </div>
                     <div class="p-5"><canvas id="chartjs-6" class="chartjs" width="undefined" height="undefined"></canvas>
                         <script>
                             new Chart(document.getElementById("chartjs-6"), {
                                 "type": "doughnut",
                                 "data": {
-                                    "labels": ["sdasd", "sdasdas", "sdasdas"],
+                                    "labels": ["Admin", "Doctor", "User"],
                                     "datasets": [{
                                         "label": "Issues",
-                                        "data": [5, 4, 1],
+                                        "data": [{{$admin }}, {{ $doctor }}, {{ $patient }}],
                                         "backgroundColor": ["rgb(255, 99, 132)", "rgb(54, 162, 235)",
                                             "rgb(255, 205, 86)"
                                         ]

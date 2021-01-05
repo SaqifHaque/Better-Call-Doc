@@ -28,7 +28,7 @@
 
         <div class="flex flex-wrap items-center">
             <div class="flex flex-shrink md:w-1/3 justify-center md:justify-start text-white">
-                <a href="/">
+                <a href="/admindash">
                     <span class="text-2xl pl-2 font-bold">Better Call Doc</span>
                 </a>
             </div>

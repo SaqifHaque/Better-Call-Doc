@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-//User
+//auth
+
 Route::get('/registration','HomeController@Registration')->name('home.registration');
 Route::post('/registration','HomeController@Register');
 
@@ -28,37 +29,44 @@ Route::post('/login','HomeController@ValidateLogin');
 Route::get('/pincode','HomeController@Pincode')->name('home.pincode');
 Route::post('/pincode','HomeController@CheckPin');
 
-Route::get('/social','HomeController@LoadFacebook');
-
-Route::get('/userdash', 'UserController@UserDash')->name('user.userdash');
-
-Route::get('/appointment/{id}', 'UserController@DoctorDetails')->name('user.doctor');
-
-Route::get('/search/{str}', 'MicroServiceController@Search')->name('user.search');
-
-Route::get('/apptable','UserController@AppTable')->name('user.app');
-
-Route::post('/takeappointment/{doctor}', 'UserController@TakeAppointment');
-
-//admin
-Route::get('/admindash', 'AdminController@admindash')->name('admin-dashboard');
-Route::post('/user', 'AdminController@store');
-Route::get('/users', 'AdminController@index')->name('user-list');
-Route::post('/status/{user}', 'AdminController@updateStatus');
-Route::get('/user/{user}/edit', 'AdminController@edit');
-Route::post('/user/{user}', 'AdminController@update');
-Route::delete('/user/{user}', 'AdminController@destroy');
-Route::get('/appointment', 'AppoinmentController@index')->name('appoinment-list');
-Route::post('/appointment-status/{appoinment}', 'AppoinmentController@updateAppointmentStatus');
-Route::post('/appointment/{appoinment}/approve', 'AppoinmentController@approveAppointmentStatus');
-Route::post('/appointment/{appoinment}/cancel', 'AppoinmentController@cancelAppointmentStatus');
-Route::get('/appointment-list', 'AppoinmentController@appointments');
-
-//doctor
-Route::get('/doctordash', 'DoctorController@doctorDash')->name('doctordash');
-
 Route::get('/facebook','HomeController@LoadFacebook');
 Route::get('/facebook-response','HomeController@FacebookResponse');
+
+Route::group(['middleware'=>['session']], function(){
+    
+    Route::group(['middleware'=>['patient']], function(){
+        //user
+
+        Route::get('/userdash', 'UserController@UserDash')->name('user.userdash');
+
+        Route::get('/appointment/{id}', 'UserController@DoctorDetails')->name('user.doctor');
+
+        Route::get('/search/{str}', 'MicroServiceController@Search')->name('user.search');
+
+        Route::get('/apptable','UserController@AppTable')->name('user.app');
+
+        Route::post('/takeappointment/{doctor}', 'UserController@TakeAppointment');
+    });
+    Route::group(['middleware'=>['admin']], function(){
+        //admin
+        Route::get('/admindash', 'AdminController@admindash')->name('admin.admindash');
+        Route::post('/user', 'AdminController@store');
+        Route::get('/users', 'AdminController@index')->name('user-list');
+        Route::post('/status/{user}', 'AdminController@updateStatus');
+        Route::get('/user/{user}/edit', 'AdminController@edit');
+        Route::post('/user/{user}', 'AdminController@update');
+        Route::delete('/user/{user}', 'AdminController@destroy');
+        Route::get('/appointment', 'AppoinmentController@index')->name('appoinment-list');
+        Route::post('/appointment-status/{appoinment}', 'AppoinmentController@updateAppointmentStatus');
+        Route::post('/appointment/{appoinment}/approve', 'AppoinmentController@approveAppointmentStatus');
+        Route::post('/appointment/{appoinment}/cancel', 'AppoinmentController@cancelAppointmentStatus');
+        Route::get('/appointment-list', 'AppoinmentController@appointments');
+    });
+    Route::group(['middleware'=>['doctor']], function(){
+            //doctor
+            Route::get('/doctordash', 'DoctorController@doctorDash')->name('doctordash');
+    });
+});
 
 
 

@@ -12,9 +12,25 @@ class AdminController extends Controller
 {
 
     public function admindash(){
-        $user= User::all();
-        
-        return view('admin.admindash');
+        $user= DB::table('users')->get();
+        $user = count($user);
+        $app = DB::table('appoinments')->where("status","Pending")->get();
+        $app = count($app);
+        $tapp = DB::table('appoinments')->get();
+        $tapp = count($tapp);
+        $admin = DB::table('users')->where("type","Admin")->get();
+        $admin = count($admin);
+        $patient = DB::table('users')->where("type","Patient")->get();
+        $patient = count($patient);
+        $doctor = DB::table('users')->where("type","Doctor")->get();
+        $doctor = count($doctor);
+        $can = DB::table('appoinments')->where("status","Cancelled")->get();
+        $can = count($can);
+        $com = DB::table('appoinments')->where("status","Completed")->get();
+        $com = count($com);
+
+
+        return view('admin.admindash',compact('user','app','tapp','admin','patient','doctor','can','com'));
     }
 
     public function index()

@@ -104,13 +104,19 @@ class HomeController extends Controller
         $auth = "";
         $user  = User::where('email', $req->email)
                         ->where('password', $req->password)
+                        ->where('type',"!=","Patient:Facebook")
+                        ->where("type","!=","Unverified")
                         ->first();
+                       // dd($user);
         if($user)
         {
-            $req->session()->put('uname', $user->name);
+            $req->session()->put('id', $user->id);
+            $req->session()->put('email', $user->email);
+            $req->session()->put('name', $user->name);
             $req->session()->put('type', $user->type);
 
             if($user->type == "Admin"){
+               // dd($user);
                 return redirect()->route('admin.admindash');
             }
             else if($user->type == "Doctor"){
@@ -134,8 +140,38 @@ class HomeController extends Controller
     public function FacebookResponse()
     {
         $info = Socialite::driver('facebook')->user();
-        print_r($info);
+        $check = DB::table('users')
+        ->where('email', '=', $info->email)
+        ->first();
+        if ($check == null) {
+            $user = new User();
+            $user->name = $info->name;
+            $user->blood_group = "N/A";
+            $user->email = $info->email;
+            $user->phone_number = "N/A";
+            $user->profile_pic = $info->avatar;
+            $user->type = "Patient:Facebook";
+            $user->status = "Verified";
+            $user->gender = "N/A";
+            $user->password = "N/A";
+            $save = $user->save();
+
+            if ($save) {
+                return redirect()->route('user.dash');
+            } else {
+                return redirect()->route('home.login');
+            }
+    }else {
+        $teacher = DB::table('users')
+            ->where('id', '=', $check->uid)
+            ->first();
+        session()->put('email', $check->email);
+        session()->put('type', $check->type);
+        session()->put('name', $check->name);
+        session()->put('id', $check->id);
+        return redirect()->route('user.dash');
     }
+}
 
     public function redirectToGoogle()
     {
