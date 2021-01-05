@@ -122,7 +122,7 @@ class HomeController extends Controller
             else if($user->type == "Doctor"){
                 return redirect()->route('doctor.doctordash');
             }
-            else if($user->type == "User"){
+            else if($user->type == "Patient"){
                 return redirect()->route('user.userdash');
             }
         }

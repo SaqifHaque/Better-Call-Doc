@@ -39,7 +39,7 @@
         <div class="text-4xl sm:text-5xl text-center my-10">Our Top Doctors</div>
 
         <div id="doctor" class="grid md:grid-cols-3 gap-8 m-5 max-w-5xl m-auto">
-        @foreach($doctors as $doc)
+        @forelse($doctors as $doc)
                 <div class="transition duration-500 ease-in-out bg-white rounded shadow-md transform hover:-translate-y-1 hover:scale-110 ...">
                     <img src="{{$doc->profile_pic}}" alt="" class="w-full h-48 sm:h-56 object-cover" />
 

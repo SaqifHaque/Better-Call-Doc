@@ -105,11 +105,9 @@ class UserController extends Controller
      }    
     }
     public function AppTable(Request $req){
-        $appointments = DB::table('appointments')
-                                            ->join('doctors','appointments.doctor_id','=','doctors.id')
-                                            ->select('appointments.*','doctors.*')
-                                            ->where('user_id',$req->session->get("id"))
-                                            ->first();
+        $appointments = DB::table('appoinments')
+                                            ->where('user_id',$req->session()->get("id"))
+                                            ->get();
         return View("user.apptable")->with("app",$appointments);
     } 
    
