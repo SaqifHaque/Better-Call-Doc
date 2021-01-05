@@ -57,5 +57,12 @@ Route::get('/appointment-list', 'AppoinmentController@appointments');
 //doctor
 Route::get('/doctordash', 'DoctorController@doctorDash')->name('doctordash');
 
+Route::get('/facebook','HomeController@LoadFacebook');
+Route::get('/facebook-response','HomeController@FacebookResponse');
+
+
+
+
+
 
 

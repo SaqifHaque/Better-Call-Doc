@@ -99,17 +99,6 @@ class HomeController extends Controller
         }
     }  
 }
-    /*public function validateRegistration() { 
-        return request()->validate([
-            'name' => 'required',
-            'email' => 'required|unique:users',
-            'blood_group' => 'required',
-            'phone_number' => 'required',
-            'gender' => 'required',
-            'password' => 'required',
-
-          ]);
-        }*/
     public function ValidateLogin(Request $req)
     {
         $auth = "";
@@ -145,12 +134,17 @@ class HomeController extends Controller
     public function FacebookResponse()
     {
         $info = Socialite::driver('facebook')->user();
-        if($save){
-            return view('Teacher.teacherDash');
-        }else{
-            return redirect()->route('user.login');
-        }
-        //
+        print_r($info);
+    }
+
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+      
+    public function handleGoogleCallback()
+    { 
+        $user = Socialite::driver('google')->user();
     }
 
     public function Logout(Request $req){

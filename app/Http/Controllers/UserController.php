@@ -112,4 +112,5 @@ class UserController extends Controller
                                             ->first();
         return View("user.apptable")->with("app",$appointments);
     } 
+   
 }
