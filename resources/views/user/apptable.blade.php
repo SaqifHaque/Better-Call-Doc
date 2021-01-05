@@ -43,7 +43,7 @@
                     <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
                         @if($ap->status == "completed") 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Actions</span>
-                            @if($ap->p_Id != "0")
+                            @if($ap->prescription_id)
 
                                 <form method="POST" action="pdf/<%=ap.p_Id%>">
                                     <button type="submit" class="text-blue-400 hover:text-blue-600">Prescription</a>

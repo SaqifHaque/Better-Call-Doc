@@ -81,8 +81,7 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="{{ asset('dex/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('dex/js/toastr.min.js') }}"></script>
+    
     <script>
         var cont = 0;
 

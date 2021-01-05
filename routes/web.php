@@ -33,6 +33,10 @@ Route::get('/facebook','HomeController@LoadFacebook');
 Route::get('/facebook-response','HomeController@FacebookResponse');
 
 Route::group(['middleware'=>['session']], function(){
+
+    Route::get('/chat','ChatController@chat');
+
+    Route::post('/send','ChatController@send');
     
     Route::group(['middleware'=>['patient']], function(){
         //user
@@ -46,6 +50,8 @@ Route::group(['middleware'=>['session']], function(){
         Route::get('/apptable','UserController@AppTable')->name('user.app');
 
         Route::post('/takeappointment/{doctor}', 'UserController@TakeAppointment');
+
+        Route::get('/notice','UserController@Notice');
     });
     Route::group(['middleware'=>['admin']], function(){
         //admin

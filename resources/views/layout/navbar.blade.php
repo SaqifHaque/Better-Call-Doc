@@ -102,7 +102,7 @@
         "positionClass": "toast-top-right",
         "preventDuplicates": true,
         "onclick": function() {
-            window.location.href = '../../userdash/notices';
+            window.location.href = '/notice';
         },
         "showDuration": "6000",
         "hideDuration": "1000",
@@ -120,7 +120,7 @@
             dataType: 'json',
             success: function(data) {
                 for (var i = 0; i < data.length; i++) {
-                    var msg = data[i].n_details + "  - " + data[i].posted_by;
+                    var msg = data[i].details + "  - " + data[i].posted_by;
                     toastr["success"](msg)
                 }
             },

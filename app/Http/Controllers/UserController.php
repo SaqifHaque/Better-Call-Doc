@@ -110,5 +110,13 @@ class UserController extends Controller
                                             ->get();
         return View("user.apptable")->with("app",$appointments);
     } 
+    public function Notice()
+    {
+        $notice = DB::table('notices')
+                        ->orderBy('id', 'desc')
+                        ->get();
+        return view('user.notices')->with('notice',$notice);
+
+    }
    
 }
