@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\User;
 use App\Doctor;
+use App\Finance;
 
 
 class AdminController extends Controller
@@ -28,15 +29,30 @@ class AdminController extends Controller
         $can = count($can);
         $com = DB::table('appoinments')->where("status","Completed")->get();
         $com = count($com);
+        $finance = DB::table('finances')->get();
+        $rev = 0;
+        foreach($finance as $f)
+        {
+                $rev += (int)$f->details;
+        }
+        $profit = ($rev*15)/100;
+        $cost = $rev - $profit;
 
 
-        return view('admin.admindash',compact('user','app','tapp','admin','patient','doctor','can','com'));
+        return view('admin.admindash',compact('user','app','tapp','admin','patient','doctor','can','com','rev','profit','cost'));
     }
 
     public function index()
     {
         $users= User::all();
         return view('admin.user-list', compact('users'));
+       
+    }
+
+    public function Finance()
+    {
+        $finances = DB::table('finances')->get();
+        return view('admin.finance')->with('finances',$finances);
        
     }
 
@@ -97,7 +113,7 @@ class AdminController extends Controller
             'email' => 'email|unique:users|required',
             'blood_group' => 'required',
             'phone_number' => 'unique:users|required',
-            'type' => 'required',
+            // 'type' => 'required',
             'status' => 'required',
             'gender' => 'required',
             'password' => 'required',
@@ -134,15 +150,17 @@ class AdminController extends Controller
 
     public function update(Request $request, User $user, Doctor $doctor)
     {
-        if($request->type === "Doctor"){
-            $user->update( $this->updateValidationUser());
-            $doctor->update( $this->updateValidationDoctor());
-            return redirect()->route('admin.user-list');
-        }
-        else{
-            $user->update( $this->updateValidationUser());
-            return redirect()->route('admin.user-list');
-        }
+        $user->update( $this->updateValidationUser());
+        return redirect()->route('admin.user-list');
+        // if($request->type == "Doctor"){
+        //    $user->update( $this->updateValidationUser());
+        //     $user->doctor->update( $this->updateValidationDoctor());
+        //     return redirect()->route('admin.user-list');
+        // }
+        // else{
+        //     $user->update( $this->updateValidationUser());
+        //     return redirect()->route('admin.user-list');
+        // }
   
     }
     public function updateValidationUser()
@@ -152,7 +170,7 @@ class AdminController extends Controller
             'email' => 'email|required',
             'blood_group' => 'required',
             'phone_number' => 'required',
-            'type' => 'required',
+            // 'type' => 'required',
             'status' => 'required',
             'gender' => 'required',
             'password' => 'required',

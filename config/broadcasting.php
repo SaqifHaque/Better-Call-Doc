@@ -29,15 +29,15 @@ return [
     */
 
     'connections' => [
+
         'pusher' => [
             'driver' => 'pusher',
-            'key' => '771a9908725213255ecd',
-            'secret' => '880d4d714e5b704250fe',
-            'app_id' => '1061042',
+            'key' => env('PUSHER_APP_KEY'),
+            'secret' => env('PUSHER_APP_SECRET'),
+            'app_id' => env('PUSHER_APP_ID'),
             'options' => [
-                'cluster' => 'ap2',
+                'cluster' => env('PUSHER_APP_CLUSTER'),
                 'useTLS' => true,
-                'encrypted' => true
             ],
         ],
 

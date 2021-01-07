@@ -37,7 +37,7 @@ class HomeController extends Controller
             $user = DB::table('users')
             ->where('email',$req->session()->get('verify'))->update(['status' => "Verified"]);
             if ($user) {
-                $request->session()->forget('pin');
+                $req->session()->forget('pin');
                 return redirect()->route('home.login');
             }
             $msg="Server Error";
@@ -60,7 +60,7 @@ class HomeController extends Controller
             'name' => 'required|min:4',
             'email' => 'required|email|unique:users',
             'bloodgroup' => 'required',
-            'phone' => 'required|min:15|max:15|unique:users',
+            'phone_number' => 'required|min:15|max:15|unique:users',
             'password' => 'required|same:confirmpass',
             'confirmpass' => 'required'
         ]);
@@ -73,11 +73,12 @@ class HomeController extends Controller
         $user->name                       = $req->name;
         $user->email                        = $req->email;
         $user->blood_group            = $req->bloodgroup;
-        $user->phone_number        = $req->phone;
+        $user->phone_number        = $req->phone_number;
         $user->type                         = "Patient";
         $user->status                       = "Unverified";
         $user->gender                      = $req->gender;
         $user->password                 = $req->password;
+        // dd($user)
 
         if ($user->save()) {
             $pin = rand(1000,9999);
@@ -115,12 +116,14 @@ class HomeController extends Controller
             $req->session()->put('name', $user->name);
             $req->session()->put('type', $user->type);
 
+            $did = DB::table('doctors')->where('user_id',$user->id)->first();
+
             if($user->type == "Admin"){
                // dd($user);
                 return redirect()->route('admin.admindash');
             }
             else if($user->type == "Doctor"){
-                return redirect()->route('doctor.doctordash');
+                return redirect()->route('doctordash',[$did->id]);
             }
             else if($user->type == "Patient"){
                 return redirect()->route('user.userdash');
@@ -154,34 +157,16 @@ class HomeController extends Controller
             $user->status = "Verified";
             $user->gender = "N/A";
             $user->password = "N/A";
-            $save = $user->save();
-
-            if ($save) {
-                return redirect()->route('user.dash');
-            } else {
-                return redirect()->route('home.login');
-            }
+            $user->save();
+            return redirect()->route('user.userdash');
     }else {
-        $teacher = DB::table('users')
-            ->where('id', '=', $check->uid)
-            ->first();
         session()->put('email', $check->email);
         session()->put('type', $check->type);
         session()->put('name', $check->name);
         session()->put('id', $check->id);
-        return redirect()->route('user.dash');
+        return redirect()->route('user.userdash');
     }
 }
-
-    public function redirectToGoogle()
-    {
-        return Socialite::driver('google')->redirect();
-    }
-      
-    public function handleGoogleCallback()
-    { 
-        $user = Socialite::driver('google')->user();
-    }
 
     public function Logout(Request $req){
     	$req->session()->flush();

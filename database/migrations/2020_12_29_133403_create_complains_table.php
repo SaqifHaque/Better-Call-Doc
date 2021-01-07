@@ -20,6 +20,7 @@ class CreateComplainsTable extends Migration
             ->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

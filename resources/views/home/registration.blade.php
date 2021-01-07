@@ -55,7 +55,7 @@
                                 <div class="input-group">
                                     <label class="label">Phone Number</label>
                                     <div class="input-group-icon">
-                                        <input id="phone" class="input--style-4" type="text" name="phone" placeholder="+880-xxxxxxxxxxx" value="{{ old('phone') }}">
+                                        <input id="phone_number" class="input--style-4" type="text" name="phone_number" placeholder="+880-xxxxxxxxxxx" value="{{ old('phone_number') }}">
                                     </div>
                                 </div>
                             </div>

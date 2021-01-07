@@ -57,14 +57,14 @@
                                     <form action="/status/{{ $user->id }}" method="POST">
                                         @csrf
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            @if ($user->status === 'Enabled')
+                                            @if ($user->status === 'Verified')
                                                 <button
                                                     class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                                     {{ $user->status }}
                                                 </button>
                                             @endif
 
-                                            @if ($user->status === 'Disabled')
+                                            @if ($user->status === 'Unverified')
                                                 <button
                                                     class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
                                                     {{ $user->status }}

@@ -22,9 +22,9 @@ class CreateInvoicesTable extends Migration
             $table->timestamps();
 
             $table->foreignId('user_id')
-            ->constrained()
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

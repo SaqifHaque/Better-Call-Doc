@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLabTestsTable extends Migration
+class CreateDoctorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateLabTestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('lab_tests', function (Blueprint $table) {
+        Schema::create('doctors', function (Blueprint $table) {
             $table->id();
-            $table->string('test');
-            $table->string('date');
-            $table->string('file_name');
-            $table->string('file_path');
-            $table->timestamps();
+            $table->string('specilization');
+            $table->string('qualification');
+            $table->string('availability');
+            $table->string('time');
+            $table->string('charge');
             $table->foreignId('user_id')
                 ->constrained()
                 ->onUpdate('cascade')
@@ -34,6 +34,6 @@ class CreateLabTestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lab_tests');
+        Schema::dropIfExists('doctors');
     }
 }

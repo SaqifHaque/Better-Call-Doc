@@ -1,6 +1,9 @@
 <title>Admin Dashboard</title>
 @extends('layout')
 @section('content')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+        integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+
     <div class="flex flex-col bg-white">
         <div class="bg-gray-800 pt-3">
             <div class="rounded-t-3xl bg-blue-400 p-4 shadow text-2xl text-white">
@@ -19,7 +22,7 @@
                         </div>
                         <div class="flex-1 text-right md:text-center">
                             <h5 class="font-bold uppercase text-gray-600 text-xl text-bold">Total Revenue</h5>
-                            <h3 class="font-bold text-3xl">$3249 <span class="text-green-500"><i
+                            <h3 class="font-bold text-3xl">${{$rev}} <span class="text-green-500"><i
                                         class="fas fa-caret-up"></i></span></h3>
                         </div>
                     </div>
@@ -163,35 +166,6 @@
                 <div class="bg-white border-transparent rounded-lg shadow-xl">
                     <div
                         class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
-                        <h5 class="font-bold uppercase text-gray-600 text-xl text-bold">Graph</h5>
-                    </div>
-                    <div class="p-5"><canvas id="chartjs-5" class="chartjs" width="undefined" height="undefined"></canvas>
-                        <script>
-                            new Chart(document.getElementById("chartjs-5"), {
-                                "type": "doughnut",
-                                "data": {
-                                    "labels": ["sdasd", "sdasdas", "sdasdas"],
-                                    "datasets": [{
-                                        "label": "Issues",
-                                        "data": [5, 4, 1],
-                                        "backgroundColor": ["rgb(255, 99, 132)", "rgb(54, 162, 235)",
-                                            "rgb(255, 205, 86)"
-                                        ]
-                                    }]
-                                }
-                            });
-
-                        </script>
-                    </div>
-                </div>
-                
-                <!--/Graph Card-->
-            </div>
-            <div class="w-full md:w-1/2 xl:w-1/3 p-6">
-                <!--Graph Card-->
-                <div class="bg-white border-transparent rounded-lg shadow-xl">
-                    <div
-                        class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
                         <h5 class="font-bold uppercase text-gray-600 text-xl text-bold">User Ratio</h5>
                     </div>
                     <div class="p-5"><canvas id="chartjs-6" class="chartjs" width="undefined" height="undefined"></canvas>
@@ -213,12 +187,96 @@
                         </script>
                     </div>
                 </div>
+                </div>
+                <div class="w-full md:w-1/2 xl:w-1/3 p-6">
+                <!--Graph Card-->
+                <div class="bg-white border-transparent rounded-lg shadow-xl">
+                    <div
+                        class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
+                        <h5 class="font-bold uppercase text-gray-600 text-xl text-bold">finance</h5>
+                    </div>
+                    <div class="p-5"><canvas id="chartjs-7" class="chartjs" width="undefined" height="undefined"></canvas>
+                        <script>
+                            new Chart(document.getElementById("chartjs-7"), {
+                                "type": "doughnut",
+                                "data": {
+                                    "labels": ["Admin", "Doctor"],
+                                    "datasets": [{
+                                        "label": "Issues",
+                                        "data": [{{$cost }}, {{ $profit }}],
+                                        "backgroundColor": ["rgb(255, 99, 132)", 
+                                            "rgb(255, 205, 86)"
+                                        ]
+                                    }]
+                                }
+                            });
+
+                        </script>
+                    </div>
+                </div>
+                </div>
+                <!--Table Card-->
+                <div class="bg-white border-transparent rounded-lg shadow-xl">
+                    <div
+                        class="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
+                        <h5 class="font-bold uppercase text-gray-600 text-xl text-bold">Post Notice</h5>
+                    </div>
+                    <div class="p-2">
+                        <form action="/noti" method="POST">
+                            @csrf
+                            <textarea name="details" class="w-full" id="" rows="5"></textarea>
+                            <div class="flex flex-row-reverse my-4">
+                                <button type="submit" class="bg-blue-300 py-2 px-5 rounded-lg">Post
+                                    Notice</button>
+                        </form>
+                    </div>
+                </div>
+            
+            <!--/table Card-->
                 
                 <!--/Graph Card-->
             </div>
             </div>
-
-
-        </div>
+            </div>
     </div>
-@endsection
+
+
+</head>
+    @endsection
+            <script async type="text/javascript"
+                        src="//cdn.carbonads.com/carbon.js?serve=CK7D52JJ&placement=wwwtailwindtoolboxcom"
+                        id="_carbonads_js"></script>
+                        <script>
+        /*Toggle dropdown list*/
+        function toggleDD(myDropMenu) {
+            document.getElementById(myDropMenu).classList.toggle("invisible");
+        }
+        /*Filter dropdown options*/
+        function filterDD(myDropMenu, myDropMenuSearch) {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById(myDropMenuSearch);
+            filter = input.value.toUpperCase();
+            div = document.getElementById(myDropMenu);
+            a = div.getElementsByTagName("a");
+            for (i = 0; i < a.length; i++) {
+                if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    a[i].style.display = "";
+                } else {
+                    a[i].style.display = "none";
+                }
+            }
+        }
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.drop-button') && !event.target.matches('.drop-search')) {
+                var dropdowns = document.getElementsByClassName("dropdownlist");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (!openDropdown.classList.contains('invisible')) {
+                        openDropdown.classList.add('invisible');
+                    }
+                }
+            }
+        }
+
+    </script>

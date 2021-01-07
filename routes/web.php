@@ -32,14 +32,19 @@ Route::post('/pincode','HomeController@CheckPin');
 Route::get('/facebook','HomeController@LoadFacebook');
 Route::get('/facebook-response','HomeController@FacebookResponse');
 
+Route::get('/logout','HomeController@Logout');
+
 Route::group(['middleware'=>['session']], function(){
 
-    Route::get('/chat','ChatController@chat');
+    Route::post('/picupload/{user}','UserController@editPic')->name('user.pic');
 
-    Route::post('/send','ChatController@send');
+    Route::get('/profile','UserController@profile')->name('user.profile');
+    
+    Route::post('/profile-edit/{user}','UserController@editProfile')->name('user.edit');
+
+    Route::get('/notice','UserController@Notice');
     
     Route::group(['middleware'=>['patient']], function(){
-        //user
 
         Route::get('/userdash', 'UserController@UserDash')->name('user.userdash');
 
@@ -49,15 +54,24 @@ Route::group(['middleware'=>['session']], function(){
 
         Route::get('/apptable','UserController@AppTable')->name('user.app');
 
-        Route::post('/takeappointment/{doctor}', 'UserController@TakeAppointment');
+        Route::post('/takeappointment/{id}', 'UserController@TakeAppointment');
 
-        Route::get('/notice','UserController@Notice');
+        Route::get('generate-pdf/{id}','PDFController@generatePDF');
+
+        Route::get('/review/{id}','UserController@Review')->name('user.review');
+
+        Route::post('/rated/{id}','UserController@Rated');
+        Route::post('/cancel/{appoinment}','UserController@Cancel');
+
     });
     Route::group(['middleware'=>['admin']], function(){
         //admin
+        Route::get('/user/new', function () {
+            return view('admin.add-user');
+        });
         Route::get('/admindash', 'AdminController@admindash')->name('admin.admindash');
         Route::post('/user', 'AdminController@store');
-        Route::get('/users', 'AdminController@index')->name('user-list');
+        Route::get('/users', 'AdminController@index')->name('admin.user-list');
         Route::post('/status/{user}', 'AdminController@updateStatus');
         Route::get('/user/{user}/edit', 'AdminController@edit');
         Route::post('/user/{user}', 'AdminController@update');
@@ -67,10 +81,16 @@ Route::group(['middleware'=>['session']], function(){
         Route::post('/appointment/{appoinment}/approve', 'AppoinmentController@approveAppointmentStatus');
         Route::post('/appointment/{appoinment}/cancel', 'AppoinmentController@cancelAppointmentStatus');
         Route::get('/appointment-list', 'AppoinmentController@appointments');
+        Route::get('/finance','AdminController@Finance');
+        Route::post('/noti', 'NoticeController@store');
     });
     Route::group(['middleware'=>['doctor']], function(){
             //doctor
-            Route::get('/doctordash', 'DoctorController@doctorDash')->name('doctordash');
+            Route::get('/doctordash/{doctor}', 'DoctorController@show')->name('doctordash');
+            Route::get('/doctor-table/{doctor}', 'DoctorController@index');
+            Route::post('/scedule/{doctor}', 'DoctorController@setTime');
+            Route::post('/appointment/{appoinment}', 'DoctorController@updateAppointmentStatus');
+            Route::post('/prescription/{appoinment}', 'PrescriptionController@store');
     });
 });
 

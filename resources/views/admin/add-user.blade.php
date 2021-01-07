@@ -68,8 +68,8 @@
                                     class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>status</label>
                                 <select name="status"
                                     class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500">
-                                    <option>Enabled</option>
-                                    <option>Disabled</option>
+                                    <option>Verified</option>
+                                    <option>Unverified</option>
                                 </select>
                             </div>
                         </div>

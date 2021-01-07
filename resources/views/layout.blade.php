@@ -14,10 +14,7 @@
     <link href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
     <!--Replace with your tailwind.css once created-->
     <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
-    <!--Totally optional :) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
-        integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
-
+    
 </head>
 
 
@@ -28,7 +25,7 @@
 
         <div class="flex flex-wrap items-center">
             <div class="flex flex-shrink md:w-1/3 justify-center md:justify-start text-white">
-                <a href="/">
+                <a href="/admindash">
                     <span class="text-2xl pl-2 font-bold">Better Call Doc</span>
                 </a>
             </div>
@@ -45,7 +42,7 @@
                     <li class="flex-1 md:flex-none md:mr-3">
                         <div class="relative inline-block">
                             <button onclick="toggleDD('myDropdown')" class="drop-button text-white focus:outline-none">
-                                <span class="pr-2"><i class="em em-robot_face"></i></span> Hi, User <svg
+                                <span class="pr-2"><i class="em em-robot_face"></i></span> Hi, {{session()->get('name')}} <svg
                                     class="h-3 fill-current inline" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20">
                                     <path
@@ -53,14 +50,11 @@
                                 </svg></button>
                             <div id="myDropdown"
                                 class="dropdownlist absolute bg-gray-800 text-white right-0 mt-3 p-3 overflow-auto z-30 invisible">
-                                <a href="#"
+                                <a href="/profile"
                                     class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i
                                         class="fa fa-user fa-fw"></i> Profile</a>
-                                <a href="#"
-                                    class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i
-                                        class="fa fa-cog fa-fw"></i> Settings</a>
                                 <div class="border border-gray-800"></div>
-                                <a href="#"
+                                <a href="/logout"
                                     class="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i
                                         class="fas fa-sign-out-alt fa-fw"></i> Log Out</a>
                             </div>
@@ -97,14 +91,14 @@
                         </a>
                     </li>
                     <li class="mr-3 flex-1">
-                        <a href="#"
+                        <a href="/appointment-list"
                             class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-blue-600">
                             <i class="fas fa-chart-area pr-0 md:pr-3 text-blue-600"></i><span
-                                class="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block"></span>
+                                class="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">Appointments</span>
                         </a>
                     </li>
                     <li class="mr-3 flex-1">
-                        <a href="#"
+                        <a href="/finance"
                             class="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500">
                             <i class="fa fa-wallet pr-0 md:pr-3"></i><span
                                 class="pb-1 md:pb-0 text-xs md:text-base text-gray-600 md:text-gray-400 block md:inline-block">Payments</span>

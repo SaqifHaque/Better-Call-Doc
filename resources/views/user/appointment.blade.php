@@ -1,41 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<title>Better Call Doc</title>
+@include('layout.navbar')
 
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Better Call Doc</title>
-
-    <!-- Bootstrap core CSS -->
-    <!-- <link href="../../assets/Home/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
-    <!-- Latest compiled and minified CSS -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
-
-    <!-- Custom styles for this template -->
-    <!-- <link href="../../assets/Home/css/heroic-features.css" rel="stylesheet"> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link href="{{ asset('dex/js/toastr.min.css') }}" rel="stylesheet">
-    <style>
-        .modal {
-            transition: opacity 0.25s ease;
-        }
-        
-        body.modal-active {
-            overflow-x: hidden;
-            overflow-y: visible !important;
-        }
-    </style>
-
-</head>
-
-<body>   
-    <form action="/takeappointment/{{ $doctor ->id }}" method="POST">
+    <form action="/takeappointment/{{ $did ->id }}" method="POST">
     @csrf
     <div class="flex p-4 space-x-4">
         <!-- <div>
@@ -84,7 +50,7 @@
                  @endforeach      
         </select>
                 <div class="mt-8">
-                    <button type="submit" class="modal-open inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <!-- Heroicon name: check -->
                 <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />

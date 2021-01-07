@@ -18,9 +18,9 @@ class CreateRatingsTable extends Migration
             $table->string('rating');
             $table->string('review');
             $table->foreignId('user_id')
-                        ->constrained()
-                        ->onUpdate('cascade')
-                        ->onDelete('cascade');
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->foreignId('doctor_id');
         });
     }
